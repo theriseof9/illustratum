@@ -17,6 +17,7 @@ jobs:
         uses: nizarmah/auto-minify@v2.1
         with:
           overwrite: true
+          js_engine: uglify-js
       - name: Auto committing minified files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
