@@ -15,8 +15,10 @@ jobs:
           token: ${{ github.token }}
       - name: Auto Minify
         uses: nizarmah/auto-minify@v2.1
+        with:
+          overwrite: true
       - name: Auto committing minified files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Github Action: Auto Minified JS and CSS files"
+          commit_message: "Minified File"
           branch: ${{ github.ref }}
