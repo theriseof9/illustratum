@@ -1,13 +1,17 @@
-steps:
-  - on:
-      push:
-      branches:
-        - master
-  - uses: actions/checkout@v2
-  - name: Auto Minify
-    uses: nizarmah/auto-minify@v2.1
-  - name: Auto committing minified files
-    uses: stefanzweifel/git-auto-commit-action@v4
-    with:
-      commit_message: "Github Action: Auto Minified JS and CSS files"
-      branch: ${{ github.ref }}
+on:
+  push:
+    branches:
+      - master
+jobs:
+  minify:
+    name: Minify JS and CSS files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Auto Minify
+        uses: nizarmah/auto-minify@v2.1
+      - name: Auto committing minified files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Github Action: Auto Minified JS and CSS files"
+          branch: ${{ github.ref }}
