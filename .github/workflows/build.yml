@@ -1,4 +1,8 @@
 steps:
+  - on:
+      push:
+      branches:
+        - master
   - uses: actions/checkout@v2
   - name: Auto Minify
     uses: nizarmah/auto-minify@v2.1
