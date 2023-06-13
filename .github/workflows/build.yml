@@ -2,6 +2,9 @@ on:
   push:
     branches:
       - master
+
+permissions: read-all|write-all
+
 jobs:
   minify:
     name: Minify JS and CSS files
