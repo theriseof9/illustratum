@@ -1,0 +1,65 @@
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script>
+        MathJax = {
+            tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="js/math.js"></script>
+    <script src="js/presetInit.js"></script>
+    <script src="js/presets.js"></script>
+    <script src="js/physics.js"></script>
+    <script src="js/simulation.js"></script>
+    <script src="js/graphics.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/Slider.js"></script>
+</head>
+<div class="ThreeBodyProblem-container isFullScreenWide isUnselectable">
+    <div class='ThreeBodyProblem-sun'><img src='img/sun.png' class='ThreeBodyProblem-spin ThreeBodyProblem-bodyImage' alt='Sun' /></div>
+    <div class='ThreeBodyProblem-earth'><img src='img/earth.png' alt='Earth' class='ThreeBodyProblem-spin ThreeBodyProblem-bodyImage'/></div>
+    <div class='ThreeBodyProblem-jupiter'><img src='img/jupiter.png' alt='Jupiter' class='ThreeBodyProblem-spin ThreeBodyProblem-bodyImage' style="width: 200%"/></div>
+    <img src="img/add_FILL0_wght400_GRAD0_opsz48.svg" class="ThreeBodyProblem-centerOfMass" alt="Center of mass">
+    <canvas class="ThreeBodyProblem-canvas"></canvas>
+</div>
+
+<div class='ThreeBodyProblem-isTextCentered ThreeBodyProblem-hasTopMarginSmall ThreeBodyProblem-hasNegativeBottomMarginNormal isUnselectable'>
+    <select name="settingType" onfocus="selectedIndex = -1" class="ThreeBodyProblem-sliderDropdown">
+        <option value="mass1">Mass 1</option>
+        <option value="mass2">Mass 2</option>
+        <option value="mass3">Mass 3</option>
+        <option value="time">Time</option>
+
+    </select>
+    <span class='ThreeBodyProblem-sliderLabel'>0.10</span>
+</div>
+
+<div class="SickSlider ThreeBodyProblem-slider isUnselectable" >
+    <div class="SickSlider-stripe"></div>
+    <div class="SickSlider-head"></div>
+</div>
+
+<!--<button class="ThreeBodyProblem-preset ThreeBodyProblem-button ThreeBodyProblem-button&#45;&#45;isSelected" data-name="FigureEight">Figure eight</button>-->
+<!--<button class="ThreeBodyProblem-preset ThreeBodyProblem-button" data-name="SunEarthJupiter">Sun, Earth and Jupiter</button>-->
+<!--<button class="ThreeBodyProblem-preset ThreeBodyProblem-button" data-name="LagrangePoint5">Lagrange point L5</button>-->
+<!--<button class="ThreeBodyProblem-preset ThreeBodyProblem-button" data-name="Kepler16">Kepler-16</button>-->
+<!--<button class="ThreeBodyProblem-preset ThreeBodyProblem-button" data-name="Chaotic">Chaotic</button>-->
+<label for="systemType">Choose a stable system:</label>
+<select name="systemType" id="systemType" class="ThreeBodyProblem-preset" onfocus="selectedIndex = -1">
+    <option value="FigureEight">Figure eight</option>
+    <option value="SunEarthJupiter">Sun, Earth and Jupiter</option>
+    <option value="LagrangePoint5">Lagrange point L5</option>
+    <option value="Kepler16">Kepler-16</option>
+    <option value="Chaotic">Chaotic</option>
+</select>
+
+<!--<a class='ThreeBodyProblem-leftBottomButton ThreeBodyProblem-mass1Button ThreeBodyProblem-doesChangeOpacityOnHover' href='#' title='Mass 1'><img src='https://evgenii.com/image/blog/2018-09-27-three-body-problem-simulator/mass_one_icon.png' alt='Mass 1' class='ThreeBodyProblem-leftBottomImage'></a>-->
+<!--<a class='ThreeBodyProblem-leftBottomButton ThreeBodyProblem-mass2Button ThreeBodyProblem-doesChangeOpacityOnHover' href='#' title='Mass 2'><img src='https://evgenii.com/image/blog/2018-09-27-three-body-problem-simulator/mass_two_icon.png' alt='Mass 2' class='ThreeBodyProblem-leftBottomImage'></a>-->
+<!--<a class='ThreeBodyProblem-leftBottomButton ThreeBodyProblem-mass3Button ThreeBodyProblem-doesChangeOpacityOnHover' href='#' title='Mass 3'><img src='https://evgenii.com/image/blog/2018-09-27-three-body-problem-simulator/mass_three_icon.png' alt='Mass 3' class='ThreeBodyProblem-leftBottomImage'></a>-->
+<!--<a class='ThreeBodyProblem-leftBottomButton ThreeBodyProblem-speedButton ThreeBodyProblem-doesChangeOpacityOnHover' href='#' title='Speed'><img src='https://evgenii.com/image/blog/2018-09-27-three-body-problem-simulator/clock_icon.png' alt='Speed' class='ThreeBodyProblem-leftBottomImage'></a>-->
+
+<script>
+userInput.init();
+simulation.start();
+</script>
