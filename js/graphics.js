@@ -8,7 +8,7 @@ var graphics = (function() {
         minimumSizePixels=10, // Minimum size of an object in pixels.
         maximumSizePixels=80, // Maximum size of an object in pixels.
         colors = {
-            orbitalPaths: ["#ff2222","#3956ff","#8938ff"],
+            orbitalPaths: ["#ff2222","#39ff78","#8938ff"],
         },
         // Positions of three bodies in pixels on screen
         bodyPositions = [
