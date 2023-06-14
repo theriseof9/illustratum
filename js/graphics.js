@@ -9,7 +9,6 @@ var graphics = (function() {
         maximumSizePixels=80, // Maximum size of an object in pixels.
         colors = {
             orbitalPaths: ["#ff2222","#3956ff","#8938ff"],
-            paleOrbitalPaths: ["#ab681c","#4957ae","#359256"]
         },
         // Positions of three bodies in pixels on screen
         bodyPositions = [
@@ -36,16 +35,11 @@ var graphics = (function() {
     function drawBody(position, size, bodyElement) {
         var left = (position.x - size/2) + 1000;
         var top = (position.y - size/2) + 1000;
-        // Using style.transform instead of style.left, since style.left was
-        // noticeably slower on mobile Chrome
         bodyElement.style.transform = "translate(" + left + "px," + top + "px)";
 
     }
 
-    // Updates the sizes of the objects
-    //    sizes: the sizes of objects in meters
     function updateObjectSizes(sizes) {
-        // Loop through the bodies
         for (var iBody = 0; iBody < sizes.length; iBody++) {
             currentBodySizes[iBody] =  sizes[iBody] / metersPerPixel;
 
@@ -85,7 +79,7 @@ var graphics = (function() {
         for (var iBody = 0; iBody < statePositions.length / 4; iBody++) {
             var bodyStart = iBody * 4; // Starting index for current body in the u array
 
-            var x = statePositions[bodyStart + 0];
+            var x = statePositions[bodyStart];
             var y = statePositions[bodyStart + 1];
 
             middleX = Math.floor(canvas.width / 2);
@@ -103,17 +97,12 @@ var graphics = (function() {
         }
     }
 
-    function drawOrbitalLines(paleOrbitalPaths) {
+    function drawOrbitalLines() {
         // Loop through the bodies
         for (var iBody = 0; iBody < bodyPositions.length; iBody++) {
             var bodyPosition = bodyPositions[iBody];
-            var orbitalPathColors = paleOrbitalPaths ? colors.paleOrbitalPaths : colors.orbitalPaths;
-            drawOrbitalLine(bodyPosition, previousBodyPositions[iBody], orbitalPathColors[iBody]);
+            drawOrbitalLine(bodyPosition, previousBodyPositions[iBody], colors.orbitalPaths[iBody]);
         }
-    }
-
-    function showCanvasNotSupportedMessage() {
-        document.getElementById("TBP-notSupportedMessage").style.display ='block';
     }
 
     // Resize canvas to will the width of container
@@ -139,31 +128,24 @@ var graphics = (function() {
 
         // Get canvas context for drawing
         context = canvas.getContext("2d");
-        if (!context) { return true; } // Error, browser does not support canvas
         return false;
     }
 
     // Create canvas for drawing and call success argument
     function init(success) {
-        if (initCanvas()) {
-            // The browser can not use canvas. Show a warning message.
-            showCanvasNotSupportedMessage();
-            return;
-        }
 
-        // Update the size of the canvas
+        initCanvas();
         fitToContainer();
 
-        var mass1Element = document.querySelector(".TBP-mass1");
-        var mass2Element = document.querySelector(".TBP-mass2");
-        var mass3Element = document.querySelector(".TBP-mass3");
+        const mass1Element = document.querySelector(".TBP-mass1");
+        const mass2Element = document.querySelector(".TBP-mass2");
+        const mass3Element = document.querySelector(".TBP-mass3");
 
         bodyElemenets = [];
         bodyElemenets.push(mass1Element);
         bodyElemenets.push(mass2Element);
         bodyElemenets.push(mass3Element);
 
-        // Execute success callback function
         success();
     }
 

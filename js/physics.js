@@ -40,27 +40,20 @@ var physics = (function() {
     };
 
     var state = {
-        // State variables used in the differential equations
-        // First two elements are x and y positions, and second two are x and y components of velocity
-        // repeated for three bodies.
         u: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     };
 
-    // Initial condition of the model. The conditions are loaded from the currently selected simulation.
     var initialConditions = {
-        bodies: 3, // Number of bodies
+        bodies: 3,
     };
 
-    // Calculate the radius of the body (in meters) based on its mass.
     function calculateRadiusFromMass(mass, density) {
         return Math.pow(3/4 * mass / ( Math.PI * density), 1/3);
     }
 
-    // Returns the diameters of three bodies in meters
     function calculateDiameters() {
         var diameters = [];
 
-        // Loop through the bodies
         for (var iBody = 0; iBody < initialConditions.bodies; iBody++) {
             if (initialConditions.densities !== undefined && initialConditions.densities.length >= initialConditions.bodies-1) {
                 var density = initialConditions.densities[iBody];
@@ -78,7 +71,6 @@ var physics = (function() {
         var centerOfMassVelocity = {x: 0, y: 0};
         var sumOfMasses = 0;
 
-        // Loop through the bodies
         for (var iBody = 0; iBody < initialConditions.bodies; iBody++) {
             var bodyStart = iBody * 4; // Starting index for current body in the u array
             centerOfMassVelocity.x += initialConditions.masses[iBody] * state.u[bodyStart + 2];
@@ -95,11 +87,9 @@ var physics = (function() {
     function calculateCenterOfMass(){
         var centerOfMass = {x: 0, y: 0};
         var sumOfMasses = 0;
-
-        // Loop through the bodies
         for (var iBody = 0; iBody < initialConditions.bodies; iBody++) {
-            var bodyStart = iBody * 4; // Starting index for current body in the u array
-            centerOfMass.x += initialConditions.masses[iBody] * state.u[bodyStart + 0];
+            var bodyStart = iBody*4; // Starting index for current body in the u array
+            centerOfMass.x += initialConditions.masses[iBody] * state.u[bodyStart];
             centerOfMass.y += initialConditions.masses[iBody] * state.u[bodyStart + 1];
             sumOfMasses += initialConditions.masses[iBody];
         }
@@ -111,29 +101,29 @@ var physics = (function() {
     }
 
     function resetStateToInitialConditions() {
-        var iBody, bodyStart;
+        let iBody, bodyStart;
 
         // Loop through the bodies
         for (iBody = 0; iBody < initialConditions.bodies; iBody++) {
             bodyStart = iBody * 4; // Starting index for current body in the u array
 
-            var position = initialConditions.positions[iBody];
-            state.u[bodyStart + 0] = position.r * Math.cos(position.theta); // x
+            const position = initialConditions.positions[iBody];
+            state.u[bodyStart] = position.r * Math.cos(position.theta); // x
             state.u[bodyStart + 1] = position.r * Math.sin(position.theta); //y
 
-            var velocity = initialConditions.velocities[iBody];
+            const velocity = initialConditions.velocities[iBody];
             state.u[bodyStart + 2] = velocity.r * Math.cos(velocity.theta); // velocity x
             state.u[bodyStart + 3] = velocity.r * Math.sin(velocity.theta); // velocity y
         }
 
-        var centerOfMassVelocity = calculateCenterOfMassVelocity();
-        var centerOfMass = calculateCenterOfMass();
+        const centerOfMassVelocity = calculateCenterOfMassVelocity();
+        const centerOfMass = calculateCenterOfMass();
 
         // Correct the velocities and positions of the bodies
         // to make the center of mass motionless at the middle of the screen
         for (iBody = 0; iBody < initialConditions.bodies; iBody++) {
             bodyStart = iBody * 4; // Starting index for current body in the u array
-            state.u[bodyStart + 0] -= centerOfMass.x;
+            state.u[bodyStart] -= centerOfMass.x;
             state.u[bodyStart + 1] -= centerOfMass.y;
             state.u[bodyStart + 2] -= centerOfMassVelocity.x;
             state.u[bodyStart + 3] -= centerOfMassVelocity.y;
