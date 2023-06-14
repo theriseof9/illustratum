@@ -195,5 +195,5 @@ var allPresets = {
                 theta: 4*Math.PI/3 + Math.PI/2
             }
         ]
-    },
-};
+    }
+}

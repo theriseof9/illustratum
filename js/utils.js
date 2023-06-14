@@ -1,5 +1,5 @@
 var userInput = (function(){
-    var sliderLabelElement, restartButton, sliderDropdown, sliderElement, slider, currentModel;
+    var sliderLabelElement, sliderDropdown, sliderElement, slider, currentModel;
     var currentSlider = "mass";
     var currentMassSliderIndex = 0;
 
@@ -59,18 +59,6 @@ var userInput = (function(){
     function roundSliderValueText(value) {
         return parseFloat(Math.round(value * 10000) / 10000).toFixed(4);
     }
-
-    function bodyNameFromIndex(index) {
-        switch(index) {
-            case 0:
-                return "the Sun";
-            case 1:
-                return "the Earth";
-            default:
-                return "Jupiter";
-        }
-    }
-
     function formatMassForSlider(mass) {
         var formatted = roundSliderValueText(mass);
 
@@ -120,7 +108,7 @@ var userInput = (function(){
     }
     function didClickRestart() {
         physics.resetStateToInitialConditions();
-        graphics.clearScene(physics.largestDistanceMeters());
+        graphics.clearScene(physics.largestDistMeters());
         graphics.updateObjectSizes(physics.calculateDiameters());
         return false; // Prevent default
     }
@@ -136,9 +124,9 @@ var userInput = (function(){
     }
 
     function resetSlider() {
-        cssHelper.removeClass(sliderElement, "ThreeBodyProblem-sliderSun");
-        cssHelper.removeClass(sliderElement, "ThreeBodyProblem-sliderEarth");
-        cssHelper.removeClass(sliderElement, "ThreeBodyProblem-sliderJupiter");
+        classHelper.removeClass(sliderElement, "TBP-sliderMass1");
+        classHelper.removeClass(sliderElement, "TBP-sliderMass2");
+        classHelper.removeClass(sliderElement, "TBP-sliderMass3");
 
         var sliderSettings = getCurrentSliderSettings();
         var simulationValue = getCurrentSimulationValue(physics.initialConditions);
@@ -146,16 +134,15 @@ var userInput = (function(){
 
         if (currentSlider === "mass") {
             sliderText = formatMassForSlider(physics.initialConditions.masses[currentMassSliderIndex]);
-
             switch(currentMassSliderIndex) {
                 case 0:
-                    cssHelper.addClass(sliderElement, "ThreeBodyProblem-sliderSun");
+                    classHelper.addClass(sliderElement, "TBP-sliderMass1");
                     break;
                 case 1:
-                    cssHelper.addClass(sliderElement, "ThreeBodyProblem-sliderEarth");
+                    classHelper.addClass(sliderElement, "TBP-sliderMass2");
                     break;
                 default:
-                    cssHelper.addClass(sliderElement, "ThreeBodyProblem-sliderJupiter");
+                    classHelper.addClass(sliderElement, "TBP-sliderMass3");
             }
         } else {
             sliderText = formatTimescaleForSlider(physics.initialConditions.timeScaleFactor);
@@ -183,66 +170,27 @@ var userInput = (function(){
         resetSlider();
     }
 
-    function didClickMass1() {
-        currentSlider = "mass";
-        currentMassSliderIndex = 0;
-        resetSlider();
-        return false;
-    }
-
-    function didClickMass2() {
-        currentSlider = "mass";
-        currentMassSliderIndex = 1;
-        resetSlider();
-        return false;
-    }
-
-    function didClickMass3() {
-        currentSlider = "mass";
-        currentMassSliderIndex = 2;
-        resetSlider();
-        return false;
-    }
-
-    function didClickSpeed() {
-        currentSlider = "speed";
-        currentMassSliderIndex = 0;
-        resetSlider();
-        return false;
-    }
-
     function didClickSliderDropdown() {
         console.log("Clicked slider")
         console.log(sliderDropdown.selectedIndex)
-        switch (sliderDropdown.selectedIndex) {
-            case 0: didClickMass1()
-                break
-            case 1: didClickMass2()
-                break
-            case 2: didClickMass3()
-                break
-            case 3: didClickSpeed()
-                break
-        }
+        currentSlider = "mass"
+        currentMassSliderIndex = sliderDropdown.selectedIndex
+        resetSlider()
     }
 
     function init() {
-        sliderLabelElement = document.querySelector(".ThreeBodyProblem-sliderLabel");
-        // restartButton = document.querySelector(".ThreeBodyProblem-reload");
-        sliderDropdown = document.querySelector(".ThreeBodyProblem-sliderDropdown");
-        sliderElement = document.querySelector(".ThreeBodyProblem-slider");
+        sliderLabelElement = document.querySelector(".TBP-sliderLabel");
+        sliderDropdown = document.querySelector(".TBP-sliderDropdown");
+        sliderElement = document.querySelector(".TBP-slider");
 
         currentModel = simulations.init();
         physics.changeInitialConditions(currentModel);
         simulations.content.didChangeModel = didChangeModel;
 
-        // Slider
-        slider = SickSlider(".ThreeBodyProblem-slider");
+        slider = SickSlider(".TBP-slider");
         slider.onSliderChange = didUpdateSlider;
         resetSlider();
 
-        // Buttons
-        // restartButton.onclick = didClickRestart;
         sliderDropdown.onchange = didClickSliderDropdown;
     }
 

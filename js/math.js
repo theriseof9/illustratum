@@ -54,7 +54,7 @@ var oddPowerCurve = (function(){
     };
 })();
 
-var cssHelper = (function(){
+var classHelper = (function(){
     function hasClass(element, className) {
         return (' ' + element.className + ' ').indexOf(' ' + className+ ' ') > -1;
     }

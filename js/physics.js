@@ -154,14 +154,14 @@ var physics = (function() {
             if (iFromBody === iToBody) { continue; }
             var iToBodyStart = iToBody * 4; // Starting index for the body in the u array
 
-            // Distance between the two bodies
-            var distanceX = state.u[iToBodyStart + 0] -
-                state.u[iFromBodyStart + 0];
+            // dist between the two bodies
+            var distX = state.u[iToBodyStart] -
+                state.u[iFromBodyStart];
 
-            var distanceY = state.u[iToBodyStart + 1] -
+            var distY = state.u[iToBodyStart + 1] -
                 state.u[iFromBodyStart + 1];
 
-            var distance = Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+            var dist = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
             var gravitationalConstant = 1;
 
             if (initialConditions.dimensionless !== true) {
@@ -171,7 +171,7 @@ var physics = (function() {
             result += gravitationalConstant *
                 initialConditions.masses[iToBody] *
                 (state.u[iToBodyStart + coordinate] - state.u[iFromBodyStart + coordinate]) /
-                (Math.pow(distance, 3));
+                (Math.pow(dist, 3));
         }
 
         return result;
@@ -186,8 +186,8 @@ var physics = (function() {
             // Starting index for current body in the u array
             var bodyStart = iBody * 4;
 
-            du[bodyStart + 0] = state.u[bodyStart + 0 + 2]; // Velocity x
-            du[bodyStart + 1] = state.u[bodyStart + 0 + 3]; // Velocity y
+            du[bodyStart] = state.u[bodyStart + 2]; // Velocity x
+            du[bodyStart + 1] = state.u[bodyStart + 3]; // Velocity y
             du[bodyStart + 2] = acceleration(iBody, 0); // Acceleration x
             du[bodyStart + 3] = acceleration(iBody, 1); // Acceleration y
         }
@@ -211,8 +211,8 @@ var physics = (function() {
         }
     }
 
-    // Returns the largest distance of an object from the center based on initial considitions
-    function largestDistanceMeters() {
+    // Returns the largest dist of an object from the center based on initial considitions
+    function largestDistMeters() {
         var result = 0;
 
         // Loop through the bodies
@@ -245,7 +245,7 @@ var physics = (function() {
         initialConditions: initialConditions,
         state: state,
         calculateDiameters: calculateDiameters,
-        largestDistanceMeters: largestDistanceMeters,
+        largestDistMeters: largestDistMeters,
         changeInitialConditions: changeInitialConditions,
         constants: constants
     };

@@ -2,13 +2,13 @@ var graphics = (function() {
     var canvas = null, // Canvas DOM element.
         context = null, // Canvas context for drawing.
         canvasHeight = 600,
-        // The scaling factor used to draw distances between the objects and their sizes
+        // The scaling factor used to draw dists between the objects and their sizes
         // Updated automatically on first draw
         metersPerPixel = 100,
         minimumSizePixels=10, // Minimum size of an object in pixels.
         maximumSizePixels=80, // Maximum size of an object in pixels.
         colors = {
-            orbitalPaths: ["#ff8b22","#6c81ff","#4ccd7a"],
+            orbitalPaths: ["#ff2222","#3956ff","#8938ff"],
             paleOrbitalPaths: ["#ab681c","#4957ae","#359256"]
         },
         // Positions of three bodies in pixels on screen
@@ -39,6 +39,7 @@ var graphics = (function() {
         // Using style.transform instead of style.left, since style.left was
         // noticeably slower on mobile Chrome
         bodyElement.style.transform = "translate(" + left + "px," + top + "px)";
+
     }
 
     // Updates the sizes of the objects
@@ -77,20 +78,6 @@ var graphics = (function() {
         previousPosition.y = newPosition.y;
     }
 
-    // Returns the x and y positions a body on screen in pixels.
-    //    position: x and y position in meters from the center of the screen.
-    function calculatePosition(position) {
-        middleX = Math.floor(canvas.width / 2);
-        middleY = Math.floor(canvas.height / 2);
-        var centerX = position.x / metersPerPixel + middleX;
-        var centerY = -position.y / metersPerPixel + middleY;
-
-        return {
-            x: centerX,
-            y: centerY
-        };
-    }
-
     // Calculates the new positions of the bodies on screen
     // from the given state variables
     function calculateNewPositions(statePositions) {
@@ -126,7 +113,7 @@ var graphics = (function() {
     }
 
     function showCanvasNotSupportedMessage() {
-        document.getElementById("ThreeBodyProblem-notSupportedMessage").style.display ='block';
+        document.getElementById("TBP-notSupportedMessage").style.display ='block';
     }
 
     // Resize canvas to will the width of container
@@ -134,7 +121,7 @@ var graphics = (function() {
 
         // Adjust the canvas to the size of the screen
         canvasHeight = Math.min(window.innerHeight, window.innerWidth) - 100;
-        document.querySelector(".ThreeBodyProblem-container").style.height = canvasHeight + 'px';
+        document.querySelector(".TBP-container").style.height = canvasHeight + 'px';
 
         canvas.style.width='100%';
         canvas.style.height= canvasHeight + 'px';
@@ -145,7 +132,7 @@ var graphics = (function() {
     // Returns true on error and false on success
     function initCanvas() {
         // Find the canvas HTML element
-        canvas = document.querySelector(".ThreeBodyProblem-canvas");
+        canvas = document.querySelector(".TBP-canvas");
 
         // Check if the browser supports canvas drawing
         if (!(window.requestAnimationFrame && canvas && canvas.getContext)) { return true; }
@@ -167,20 +154,20 @@ var graphics = (function() {
         // Update the size of the canvas
         fitToContainer();
 
-        var earthElement = document.querySelector(".ThreeBodyProblem-earth");
-        var sunElement = document.querySelector(".ThreeBodyProblem-sun");
-        var jupiterElement = document.querySelector(".ThreeBodyProblem-jupiter");
+        var mass1Element = document.querySelector(".TBP-mass1");
+        var mass2Element = document.querySelector(".TBP-mass2");
+        var mass3Element = document.querySelector(".TBP-mass3");
 
         bodyElemenets = [];
-        bodyElemenets.push(sunElement);
-        bodyElemenets.push(earthElement);
-        bodyElemenets.push(jupiterElement);
+        bodyElemenets.push(mass1Element);
+        bodyElemenets.push(mass2Element);
+        bodyElemenets.push(mass3Element);
 
         // Execute success callback function
         success();
     }
 
-    function clearScene(largestDistanceMeters) {
+    function clearScene(largestdistMeters) {
         context.clearRect(0, 0, canvas.width, canvas.height);
         previousBodyPositions = [
             {x: null, y: null},
@@ -189,7 +176,7 @@ var graphics = (function() {
         ];
 
         // Update the scaling
-        metersPerPixel = 2.3 * largestDistanceMeters / Math.min(canvas.offsetWidth, canvas.offsetHeight, window.innerHeight);
+        metersPerPixel = 2.3 * largestdistMeters / Math.min(canvas.offsetWidth, canvas.offsetHeight, window.innerHeight);
     }
 
     return {

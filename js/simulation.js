@@ -9,7 +9,7 @@ var simulation = (function() {
             physics.updatePosition(timestep);
             if (i % drawIndex === 0) {
                 graphics.calculateNewPositions(physics.state.u);
-                // graphics.drawOrbitalLines(physics.initialConditions.paleOrbitalPaths);
+                graphics.drawOrbitalLines(physics.initialConditions.paleOrbitalPaths);
             }
         }
         graphics.drawBodies();
@@ -19,13 +19,13 @@ var simulation = (function() {
     function start() {
         graphics.init(function() {
             physics.resetStateToInitialConditions();
-            graphics.clearScene(physics.largestDistanceMeters());
+            graphics.clearScene(physics.largestDistMeters());
             graphics.updateObjectSizes(physics.calculateDiameters());
             window.addEventListener('resize', function(event){
                 graphics.fitToContainer();
-                graphics.clearScene(physics.largestDistanceMeters());
+                graphics.clearScene(physics.largestDistMeters());
                 graphics.calculateNewPositions(physics.state.u);
-                // graphics.drawOrbitalLines(physics.initialConditions.paleOrbitalPaths);
+                graphics.drawOrbitalLines(physics.initialConditions.paleOrbitalPaths);
                 graphics.drawBodies();
             });
 

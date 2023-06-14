@@ -1,8 +1,8 @@
-.ThreeBodyProblem-hasTopMarginSmall {
+.TBP-hasTopMarginSmall {
     margin-top: 5px;
 }
 
-.ThreeBodyProblem-hasNegativeBottomMarginNormal {
+.TBP-hasNegativeBottomMarginNormal {
     margin-bottom: -10px;
 }
 
@@ -11,14 +11,14 @@
   --------
 */
 
-.ThreeBodyProblem-alert {
+.TBP-alert {
     color: red;
     border: 1px solid red;
     background: #ffeeee;
     padding: 5px;
 }
 
-.ThreeBodyProblem-container {
+.TBP-container {
     background-color: #000000;
     position: relative;
     height: 700px;
@@ -27,11 +27,11 @@
     background-size: 874px 780px;
 }
 
-.ThreeBodyProblem-isTextCentered { text-align: center; }
-.ThreeBodyProblem-isHiddenBlock { display: none; }
+.TBP-isTextCentered { text-align: center; }
+.TBP-isHiddenBlock { display: none; }
 
 
-.ThreeBodyProblem-centerOfMass {
+.TBP-centerOfMass {
     position: absolute;
     width: 11px;
     top: 50%;
@@ -41,9 +41,9 @@
     z-index: 998;
 }
 
-.ThreeBodyProblem-earth,
-.ThreeBodyProblem-jupiter,
-.ThreeBodyProblem-sun {
+.TBP-mass2,
+.TBP-mass3,
+.TBP-mass1 {
     position: absolute;
     width: 60px;
     top: -1000px;
@@ -51,14 +51,14 @@
     z-index: 1000;
 }
 
-.ThreeBodyProblem-bodyImage {
+.TBP-bodyImage {
     position: absolute;
     width: 100%;
     top: 0px;
     left: 0px;
 }
 
-.ThreeBodyProblem-spin {
+.TBP-spin {
     -webkit-animation:spin .5s linear infinite;
     -moz-animation:spin .5s linear infinite;
     animation:spin .5s linear infinite;
@@ -68,7 +68,7 @@
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
 
-.ThreeBodyProblem-canvas { display: block; }
+.TBP-canvas { display: block; }
 
 /* Prevent browser from showing selection when the element is touched */
 .isUnselectable {
@@ -86,7 +86,7 @@
   ---------
 */
 
-.ThreeBodyProblem-hudContainer {
+.TBP-hudContainer {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -95,7 +95,7 @@
     top: 0;
 }
 
-.ThreeBodyProblem-hudContainerChild {
+.TBP-hudContainerChild {
     position: relative;
     width: 100%;
     height: 100%;
@@ -110,7 +110,7 @@
 */
 
 
-.ThreeBodyProblem-leftBottomButtonCantainer {
+.TBP-leftBottomButtonCantainer {
     position: absolute;
     display: block;
     left: 15px;
@@ -119,24 +119,24 @@
     height: 40px;
 }
 
-.ThreeBodyProblem-leftBottomButton {
+.TBP-leftBottomButton {
     display: block;
     height: 40px;
     width: 40px;
     float: left;
 }
 
-.ThreeBodyProblem-leftBottomImage {
+.TBP-leftBottomImage {
     height: 100%;
     border : 0;
 }
 
-.ThreeBodyProblem-doesChangeOpacityOnHover {
+.TBP-doesChangeOpacityOnHover {
     opacity: 0.8;
     filter: alpha(opacity=80);
 }
 
-.ThreeBodyProblem-doesChangeOpacityOnHover:hover {
+.TBP-doesChangeOpacityOnHover:hover {
     opacity: 1.0;
     filter: alpha(opacity=100);
 }
@@ -146,7 +146,7 @@
   ---------
 */
 
-.ThreeBodyProblem-reload {
+.TBP-reload {
     position: absolute;
     display: block;
     bottom: 10px;
@@ -155,36 +155,29 @@
     height: 40px;
 }
 
-.ThreeBodyProblem-reloadIcon {
+.TBP-reloadIcon {
     width: 100%;
     border : 0;
 }
 
 
-.ThreeBodyProblem-slider{
+.TBP-slider{
     margin: 0 auto;
 }
 
-.ThreeBodyProblem-sliderSun .SickSlider-head {
+.TBP-sliderMass1 .SickSlider-head {
     background-color: #ff9400;
 }
 
-.ThreeBodyProblem-sliderEarth .SickSlider-head {
+.TBP-sliderMass2 .SickSlider-head {
     background-color: #6780FF;
 }
 
-.ThreeBodyProblem-sliderJupiter .SickSlider-head {
+.TBP-sliderMass3 .SickSlider-head {
     background-color: #4BCF79;
 }
 
-/*
-
-Button
---------------
-
-*/
-
-.ThreeBodyProblem-button {
+.TBP-button {
     margin: 5px;
     padding: 5px 10px 3px 10px;
     display: inline-block;
@@ -196,7 +189,7 @@ Button
     cursor: pointer;
 }
 
-.ThreeBodyProblem-button--isSelected {
+.TBP-button--isSelected {
     background-color: #a66000;
 }
 

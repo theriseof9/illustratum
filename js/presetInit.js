@@ -4,7 +4,7 @@ var simulations = (function(){
     };
 
     function didClickElement(element) {
-        if (!cssHelper.hasClass(element, "ThreeBodyProblem-preset")) {
+        if (!classHelper.hasClass(element, "TBP-preset")) {
             didClickElement(element.parentElement);
             return;
         }
@@ -24,7 +24,7 @@ var simulations = (function(){
     }
 
     function init() {
-        var presetElement = document.querySelector(".ThreeBodyProblem-preset");
+        var presetElement = document.querySelector(".TBP-preset");
         presetElement.onchange = didClick;
         return allPresets.FigureEight;
     }
