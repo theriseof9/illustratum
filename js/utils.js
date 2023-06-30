@@ -1,5 +1,5 @@
 var userInput = (function(){
-    var sliderLabelElement, sliderDropdown, sliderElement, slider, currentModel;
+    var sliderLabelElement, sliderDropdown, sliderElement, currentModel;
     var currentSlider = "mass";
     var currentMassSliderIndex = 0;
 
@@ -13,7 +13,7 @@ var userInput = (function(){
     function didUpdateSlider(sliderValue) {
         var sliderText;
         var sliderSettings = getCurrentSliderSettings();
-
+        console.log('updated to', sliderValue)
 
         if (sliderSettings.power !== undefined) {
 
@@ -59,6 +59,7 @@ var userInput = (function(){
     function roundSliderValueText(value) {
         return parseFloat(Math.round(value * 10000) / 10000).toFixed(4);
     }
+
     function formatMassForSlider(mass) {
         var formatted = roundSliderValueText(mass);
 
@@ -145,22 +146,25 @@ var userInput = (function(){
                     classHelper.addClass(sliderElement, "TBP-sliderMass3");
             }
         } else {
+            console.log("time")
             sliderText = formatTimescaleForSlider(physics.initialConditions.timeScaleFactor);
         }
 
         sliderLabelElement.innerText = sliderText;
-        var sliderPosition = (simulationValue - sliderSettings.min) / (sliderSettings.max - sliderSettings.min);
+        let sliderPosition = (simulationValue - sliderSettings.min) / (sliderSettings.max - sliderSettings.min);
 
         if (sliderSettings.power !== undefined) {
             if (sliderSettings.power % 2 === 1) { // Odd power
-                var defaultOutput = calculateDefaultSliderOutput(sliderSettings);
+                const defaultOutput = calculateDefaultSliderOutput(sliderSettings);
                 sliderPosition = oddPowerCurve.sliderInputValue(defaultOutput, sliderPosition, sliderSettings.power);
             } else {
                 sliderPosition = Math.pow(sliderPosition, 1 / sliderSettings.power);
             }
+            console.log(sliderSettings.power)
         }
 
-        slider.changePosition(sliderPosition);
+        console.log('resetting val to:', sliderPosition)
+        sliderElement.value = sliderPosition
     }
 
     function didChangeModel(model) {
@@ -174,6 +178,7 @@ var userInput = (function(){
         console.log("Clicked slider")
         console.log(sliderDropdown.selectedIndex)
         currentSlider = "mass"
+        if (sliderDropdown.selectedIndex === 3) currentSlider = "time"
         currentMassSliderIndex = sliderDropdown.selectedIndex
         resetSlider()
     }
@@ -181,14 +186,13 @@ var userInput = (function(){
     function init() {
         sliderLabelElement = document.querySelector(".TBP-sliderLabel");
         sliderDropdown = document.querySelector(".TBP-sliderDropdown");
-        sliderElement = document.querySelector(".TBP-slider");
+        sliderElement = document.getElementById('ok-but');
 
         currentModel = simulations.init();
         physics.changeInitialConditions(currentModel);
         simulations.content.didChangeModel = didChangeModel;
 
-        slider = SickSlider(".TBP-slider");
-        slider.onSliderChange = didUpdateSlider;
+        sliderElement.oninput = e => didUpdateSlider(e.currentTarget.value)
         resetSlider();
 
         sliderDropdown.onchange = didClickSliderDropdown;

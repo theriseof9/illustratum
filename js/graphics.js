@@ -8,7 +8,7 @@ var graphics = (function() {
         minimumSizePixels=10, // Minimum size of an object in pixels.
         maximumSizePixels=80, // Maximum size of an object in pixels.
         colors = {
-            orbitalPaths: ["#ff2222","#39ff78","#8938ff"],
+            orbitalPaths: ["#d72e3a","#4ccdd2","#6746ff"],
         },
         // Positions of three bodies in pixels on screen
         bodyPositions = [
@@ -63,6 +63,7 @@ var graphics = (function() {
         }
 
         context.beginPath();
+        context.lineWidth = 5000
         context.strokeStyle = color;
         context.moveTo(previousPosition.x, previousPosition.y);
         context.lineTo(newPosition.x, newPosition.y);

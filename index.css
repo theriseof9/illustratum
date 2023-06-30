@@ -1,3 +1,10 @@
+body {
+    font-family: -apple-system, sans-serif;
+    background-color: #000000;
+    color: #eee;
+    color-scheme: dark;
+}
+
 .TBP-hasTopMarginSmall {
     margin-top: 5px;
 }
@@ -6,29 +13,39 @@
     margin-bottom: -10px;
 }
 
+.yourMom {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    --theme-primary: 55 66 140;
+    background: rgba(var(--theme-primary) / .5);
+    border: 1px solid rgba(var(--theme-primary) / 1);
+    border-radius: 4px;
+    padding: .5rem;
+    backdrop-filter: blur(4px) saturate(1.2);
+    -webkit-backdrop-filter: blur(4px) saturate(1.2); /*sufferi only*/
+    z-index: 1000;
+    width: 300px;
+}
+
+.sect h1, .sect h2 {
+
+}
+
 /*
   Elements
   --------
 */
 
-.TBP-alert {
-    color: red;
-    border: 1px solid red;
-    background: #ffeeee;
-    padding: 5px;
-}
-
 .TBP-container {
-    background-color: #000000;
     position: relative;
     height: 700px;
-    background-position: center bottom;
-    background-repeat: repeat;
-    background-size: 874px 780px;
+    border: 1px solid #888;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .TBP-isTextCentered { text-align: center; }
-.TBP-isHiddenBlock { display: none; }
 
 
 .TBP-centerOfMass {
@@ -81,147 +98,20 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
-/*
-  Hud display
-  ---------
-*/
 
-.TBP-hudContainer {
-    position: absolute;
-    height: 100%;
+.ModeratelyUnwellSlider{
     width: 100%;
-    z-index: 1001;
-    left: 0;
-    top: 0;
+    margin: .7rem 0;
 }
 
-.TBP-hudContainerChild {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+.TBP-sliderMass1.ModeratelyUnwellSlider {
+    accent-color: #d72e3a;
 }
 
-/*
-  Left buttons
-  ---------
-*/
-
-
-.TBP-leftBottomButtonCantainer {
-    position: absolute;
-    display: block;
-    left: 15px;
-    right: 15px;
-    bottom: 10px;
-    height: 40px;
+.TBP-sliderMass2.ModeratelyUnwellSlider {
+    accent-color: #4ccdd2;
 }
 
-.TBP-leftBottomButton {
-    display: block;
-    height: 40px;
-    width: 40px;
-    float: left;
-}
-
-.TBP-leftBottomImage {
-    height: 100%;
-    border : 0;
-}
-
-.TBP-doesChangeOpacityOnHover {
-    opacity: 0.8;
-    filter: alpha(opacity=80);
-}
-
-.TBP-doesChangeOpacityOnHover:hover {
-    opacity: 1.0;
-    filter: alpha(opacity=100);
-}
-
-/*
-  Reload button
-  ---------
-*/
-
-.TBP-reload {
-    position: absolute;
-    display: block;
-    bottom: 10px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-}
-
-.TBP-reloadIcon {
-    width: 100%;
-    border : 0;
-}
-
-
-.TBP-slider{
-    margin: 0 auto;
-}
-
-.TBP-sliderMass1 .SickSlider-head {
-    background-color: #ff9400;
-}
-
-.TBP-sliderMass2 .SickSlider-head {
-    background-color: #6780FF;
-}
-
-.TBP-sliderMass3 .SickSlider-head {
-    background-color: #4BCF79;
-}
-
-.TBP-button {
-    margin: 5px;
-    padding: 5px 10px 3px 10px;
-    display: inline-block;
-    background-color: #ff6c00;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 30% 10%/80%;
-    border: none;
-    cursor: pointer;
-}
-
-.TBP-button--isSelected {
-    background-color: #a66000;
-}
-
-/*
-
-Sick Slider
---------------
-
-*/
-
-.SickSlider {
-    position: relative;
-    height: 60px;
-    cursor: pointer;
-}
-
-.SickSlider-stripe {
-    height: 5px;
-    width: 100%;
-    background-color: #999999;
-    /*border: 1px solid #a66000;*/
-    position: absolute;
-    top: 28px;
-    left: 0px;
-}
-
-.SickSlider-head {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 30px;
-    height: 40px;
-    background-color: #999999;
-    border: 1px solid #FFFFFF;
+.TBP-sliderMass3.ModeratelyUnwellSlider {
+    accent-color: #6746ff;
 }

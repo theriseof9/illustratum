@@ -24,28 +24,64 @@
         <div class='TBP-mass3'><img src='img/mass3.png' alt='Mass 3' class='TBP-spin TBP-bodyImage'/></div>
         <img src="img/add_FILL0_wght400_GRAD0_opsz48.svg" class="TBP-centerOfMass" alt="Center of mass">
         <canvas class="TBP-canvas"></canvas>
+        <div class="yourMom">
+            <div class='TBP-isTextCentered TBP-hasTopMarginSmall isUnselectable'>
+                <select name="settingType" class="TBP-sliderDropdown">
+                    <option value="mass1">Mass 1</option>
+                    <option value="mass2">Mass 2</option>
+                    <option value="mass3">Mass 3</option>
+                    <option value="time">Time</option>
+                </select>
+                <span class='TBP-sliderLabel'>0.10</span>
+            </div>
+
+            <input type="range" class="isUnselectable ModeratelyUnwellSlider" id="ok-but" max="1" step="0.001">
+            <label for="systemType" style="padding-bottom: 1rem;">Choose a stable system:</label>
+            <select name="systemType" id="systemType" class="TBP-preset">
+                <option value="FigureEight">Figure eight</option>
+                <option value="SunEarthJupiter">Sun, Earth and Jupiter</option>
+                <option value="LagrangePoint5">Lagrange point L5</option>
+                <option value="Kepler16">Kepler-16</option>
+                <option value="Chaotic">Chaotic</option>
+            </select>
+            <div style="padding-top: 1rem">
+                <label for="ok-but-width">Line trace width</label>
+                <input type="range" class="isUnselectable ModeratelyUnwellSlider" id="ok-but-width" max="1" step="0.001">
+            </div>
+        </div>
     </div>
-    <div class='TBP-isTextCentered TBP-hasTopMarginSmall TBP-hasNegativeBottomMarginNormal isUnselectable'>
-        <select name="settingType" onfocus="selectedIndex = -1" class="TBP-sliderDropdown">
-            <option value="mass1">Mass 1</option>
-            <option value="mass2">Mass 2</option>
-            <option value="mass3">Mass 3</option>
-            <option value="time">Time</option>
-        </select>
-        <span class='TBP-sliderLabel'>0.10</span>
+
+    <div class="sect">
+        <h1>Introduction</h1>
+        <h2>What is the Three Body Problem?</h2>
+        Consider the Earth, Moon and Sun orbiting around each other in space. Now, further consider the Earth, Jupiter and Sun orbiting around each other. In these two cases, the Moon and Jupiter exhibit differing motions around the Earth and the Sun. In fact, both of these are special cases of the Three Body Problem.
+
+        In essence, the Three Body Problem aims to describe the motions of three point masses, also called bodies (in most contexts, these are planets), whose motion depend only on the gravitational attraction between them.
+
+        This may be fairly simple to understand, but it is in fact a complicated problem that has eluded mathematicians since Newton’s time.
+
+        <h2>A Brief History of the Three Body Problem</h2>
+        The Three Body Problem was first posed by Isaac Newton in 1687, when he published his Principia.
+
+        It become of technical importance in the 1720s, where an accurate solution would be applicable to marine navigation, as it would allow for the development of accurate lunar tables to determine longitude at sea. In fact, the Longitude Act 1714 offered up to £20,000 for a method to determine longitude at sea to an accuracy of half a degree. (However, the most accurate solution was developed by John Harrison with the invention of the marine chronometer.)
+
+        Throughout the years, many special case solutions have also been found, some of which will be explained in Section 4.
     </div>
-    <div class="SickSlider TBP-slider isUnselectable" >
-        <div class="SickSlider-stripe"></div>
-        <div class="SickSlider-head"></div>
+    <div class="sect">
+        <h1>A Look at the Two Body Problem</h1>
+        The Two Body Problem is a simplified version of the Three Body Problem, where, as its name suggests, there are two point masses instead of three.
+
+        This problem was first posed (and solved!) by Newton in the same book Principia,
     </div>
-    <label for="systemType">Choose a stable system:</label>
-    <select name="systemType" id="systemType" class="TBP-preset" onfocus="selectedIndex = -1">
-        <option value="FigureEight">Figure eight</option>
-        <option value="SunEarthJupiter">Sun, Earth and Jupiter</option>
-        <option value="LagrangePoint5">Lagrange point L5</option>
-        <option value="Kepler16">Kepler-16</option>
-        <option value="Chaotic">Chaotic</option>
-    </select>
+    <div class="sect">
+        <h1>The Chaos of the Three Body Problem</h1>
+    </div>
+    <div class="sect">
+        <h1>Special Case Solutions to the Three Body Problem</h1>
+
+        There are a few special case systems which yield stable solutions. Firstly, a binary system with a third mass at the centre of mass of the entire system would behave like a normal binary system (with a shorter orbital period, due to the third mass). Next, a figure eight system, such that the self intersection is in the same location as the centre of mass of the system, containing 3 identical masses evenly distributed throughout the orbit will also be stable. For other solutions, we have to make the assumption that the third object has negligible mass (which is often valid, given the astronomical contexts). Then, the five Lagrange points also become solutions for the third mass given two masses in a stable orbit. L1, L2 and L3 are all collinear with the first two bodies, but are divergent in their neighbourhood. L4 and L5 are 60 degrees in front of and behind the second mass, and have converging neighbourhoods (but only if M1/M2 is greater than about 25). Natural satellites can be found at the L4/L5 points in star-planet systems (known as the Trojans, derived from the name given to such asteroids of the Sun-Jupiter system) because of its stability. The JWST is also positioned near L2 of the Sun-Earth system because the Sun is bright and hot which is bad for telescope, and L2 is the furthest possible stationary point for the third mass from the Sun.
+    </div>
+
     <script>
         userInput.init();
         simulation.start();
