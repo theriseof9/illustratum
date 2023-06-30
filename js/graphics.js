@@ -63,7 +63,7 @@ var graphics = (function() {
         }
 
         context.beginPath();
-        context.lineWidth = 5000
+        context.lineWidth = 2
         context.strokeStyle = color;
         context.moveTo(previousPosition.x, previousPosition.y);
         context.lineTo(newPosition.x, newPosition.y);

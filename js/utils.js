@@ -1,5 +1,5 @@
 var userInput = (function(){
-    var sliderLabelElement, sliderDropdown, sliderElement, currentModel;
+    var sliderLabelElement, sliderDropdown, sliderElement, currentModel, lineWidthSlider;
     var currentSlider = "mass";
     var currentMassSliderIndex = 0;
 
@@ -187,6 +187,7 @@ var userInput = (function(){
         sliderLabelElement = document.querySelector(".TBP-sliderLabel");
         sliderDropdown = document.querySelector(".TBP-sliderDropdown");
         sliderElement = document.getElementById('ok-but');
+        lineWidthSlider = document.getElementById("ok-but-width")
 
         currentModel = simulations.init();
         physics.changeInitialConditions(currentModel);
