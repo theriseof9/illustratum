@@ -7,36 +7,35 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="js/math.js"></script>
-    <script src="js/presetInit.js"></script>
-    <script src="js/presets.js"></script>
-    <script src="js/physics.js"></script>
-    <script src="js/simulation.js"></script>
-    <script src="js/graphics.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/Slider.js"></script>
+    <script src="js/threebody/math.js"></script>
+    <script src="js/threebody/presetInit.js"></script>
+    <script src="js/threebody/presets.js"></script>
+    <script src="js/threebody/physics.js"></script>
+    <script src="js/threebody/simulation.js"></script>
+    <script src="js/threebody/graphics.js"></script>
+    <script src="js/threebody/utils.js"></script>
     <title>Three Body problem</title>
 </head>
 <body>
-    <div class="TBP-container isFullScreenWide isUnselectable">
-        <div class='TBP-mass1'><img src='img/mass1.png' class='TBP-spin TBP-bodyImage' alt='Mass 1' /></div>
-        <div class='TBP-mass2'><img src='img/mass2.png' alt='Mass 2' class='TBP-spin TBP-bodyImage'/></div>
-        <div class='TBP-mass3'><img src='img/mass3.png' alt='Mass 3' class='TBP-spin TBP-bodyImage'/></div>
-        <img src="img/add_FILL0_wght400_GRAD0_opsz48.svg" class="TBP-centerOfMass" alt="Center of mass">
-        <canvas class="TBP-canvas"></canvas>
+    <div class="container isFullScreenWide isUnselectable">
+        <div class='mass1'><img src='img/mass1.png' class='spin bodyImage' alt='Mass 1' /></div>
+        <div class='mass2'><img src='img/mass2.png' alt='Mass 2' class='spin bodyImage'/></div>
+        <div class='mass3'><img src='img/mass3.png' alt='Mass 3' class='spin bodyImage'/></div>
+        <img src="img/add_FILL0_wght400_GRAD0_opsz48.svg" class="centerOfMass" alt="Center of mass">
+        <canvas class="canvas"></canvas>
         <div class="yourMom">
-            <div class='TBP-isTextCentered TBP-hasTopMarginSmall isUnselectable'>
-                <select name="settingType" class="TBP-sliderDropdown">
+            <div class='isTextCentered hasTopMarginSmall isUnselectable'>
+                <select name="settingType" class="sliderDropdown">
                     <option value="mass1">Mass 1</option>
                     <option value="mass2">Mass 2</option>
                     <option value="mass3">Mass 3</option>
                     <option value="time">Time</option>
                 </select>
-                <span class='TBP-sliderLabel'>0.10</span>
+                <span class='sliderLabel'>0.10</span>
             </div>
             <input type="range" class="isUnselectable ModeratelyUnwellSlider" id="ok-but" max="1" step="0.001">
             <label for="systemType" style="padding-bottom: 1rem;">Choose a stable system:</label>
-            <select name="systemType" id="systemType" class="TBP-preset">
+            <select name="systemType" id="systemType" class="preset">
                 <option value="FigureEight">Figure eight</option>
                 <option value="SunEarthJupiter">Sun, Earth and Jupiter</option>
                 <option value="LagrangePoint5">Lagrange point L5</option>
@@ -49,35 +48,45 @@
             </div>
         </div>
     </div>
-
     <div class="sect">
         <h1>Introduction</h1>
         <h2>What is the Three Body Problem?</h2>
         Consider the Earth, Moon and Sun orbiting around each other in space. Now, further consider the Earth, Jupiter and Sun orbiting around each other. In these two cases, the Moon and Jupiter exhibit differing motions around the Earth and the Sun. In fact, both of these are special cases of the Three Body Problem.
-
-        In essence, the Three Body Problem aims to describe the motions of three point masses, also called bodies (in most contexts, these are planets), whose motion depend only on the gravitational attraction between them.
-
-        This may be fairly simple to understand, but it is in fact a complicated problem that has eluded mathematicians since Newton’s time.
-
+        <br><br> In essence, the Three Body Problem aims to describe the motions of three point masses, also called bodies (in most contexts, these are planets), whose motion depend only on the gravitational attraction between them.
+        <br><br> This may be fairly simple to understand, but it is in fact a complicated problem that has eluded mathematicians since Newton's time.
         <h2>A Brief History of the Three Body Problem</h2>
         The Three Body Problem was first posed by Isaac Newton in 1687, when he published his Principia.
-
-        It become of technical importance in the 1720s, where an accurate solution would be applicable to marine navigation, as it would allow for the development of accurate lunar tables to determine longitude at sea. In fact, the Longitude Act 1714 offered up to £20,000 for a method to determine longitude at sea to an accuracy of half a degree. (However, the most accurate solution was developed by John Harrison with the invention of the marine chronometer.)
-
-        Throughout the years, many special case solutions have also been found, some of which will be explained in Section 4.
+        <br><br> It become of technical importance in the 1720s, where an accurate solution would be applicable to marine navigation, as it would allow for the development of accurate lunar tables to determine longitude at sea. In fact, the Longitude Act 1714 offered up to $20,000 for a method to determine longitude at sea to an accuracy of half a degree. (However, the most accurate solution was developed by John Harrison with the invention of the marine chronometer.)
+        <br><br> Throughout the years, many special case solutions have also been found, some of which will be explained in Section 4.
     </div>
     <div class="sect">
         <h1>A Look at the Two Body Problem</h1>
         The Two Body Problem is a simplified version of the Three Body Problem, where, as its name suggests, there are two point masses instead of three.
+        <br><br> This problem was first posed, and solved, by Newton in the same book Principia.
+        <h2>Newton's Laws of Motion</h2>
+        Before we get into the problem, let us first understand the basics of motion.
+        <br><br> Newton's First Law: A body remains at rest, or in motion along a straight line, unless acted upon by an external force. This should make a lot of sense.
+        <br><br> Newton's Second Law: The force acting on a body can be described by $$F=ma,$$ where $m$ is the mass of the body and $a$ is its acceleration.
+        <br><br> Newton's Third Law: When two bodies exert a force on each other, the forces have the same magnitude but opposite directions. For example, if you are pushing someone, both of you experience the same force, but in opposite directions.
+        <h2>Gravitational Force</h2>
+        Next, we should also understand what the force between the planets is. This is known as gravitational force, which is essentially how strongly one planet attracts another planet.
+        <br><br> Gravitational force can be described using the following relationship: $$F=\frac{Gm_1m_2}{r^2},$$ where $G=6.67\times10^{-11}$ is the gravitational constant, $m_1$ and $m_2$ are the masses of the two planets and $r$ is the distance between the two planets (measured from each of their centres).
+        <br><br> In other words, the gravitational force increases linearly with the mass of the planets and decreases quadratically (much faster) with the distance between them.
+        <br><br> Sometimes, the gravitational force would also be written with a negative sign to signify that it is an attractive force.
+        <h2>The Equations of the Two Body Problem</h2>
+        In the Two Body Problem, the two bodies exert a gravitational force on each other. To express this mathematically, we let the two bodies have masses $m_1$ and $m_2$, and let the distance between them be $r$. Then at any point in time, we always have $$m_1a_1=\frac{Gm_1m_2}{r^2}$$ and $$m_2a_2=-\frac{Gm_1m_2}{r^2}.$$ The minus sign in the second equation is due to Newton’s Third Law, since the forces act in opposite directions. These two equations can be solved to yield a general solution to the Two Body Problem.
+        <br><br> In the general solution, the two bodies will orbit around their centre of mass in an elliptical orbit, as shown below.
 
-        This problem was first posed (and solved!) by Newton in the same book Principia,
     </div>
     <div class="sect">
         <h1>The Chaos of the Three Body Problem</h1>
+        Finally, we will investigate what happens in the Three Body Problem.
+        <br><br> Similar equations can be written as in the Two Body Problem, but now, the equations become unsolvable.
+        <br><br> The main reason for this is the lack of symmetry in the Three Body Problem as compared to the Two Body Problem, where the force on each body was equal in magnitude due to Newton's Third Law. In the Three Body Problem, each body experiences a force from the two other bodies, disrupting the symmetry.
+        <br><br> In fact, under most initial conditions, the Three Body Problem exhibits chaotic motion, meaning it is impossible to determine the future movement of the three bodies.
     </div>
     <div class="sect">
         <h1>Special Case Solutions to the Three Body Problem</h1>
-
         There are a few special case systems which yield stable solutions. Firstly, a binary system with a third mass at the centre of mass of the entire system would behave like a normal binary system (with a shorter orbital period, due to the third mass). Next, a figure eight system, such that the self intersection is in the same location as the centre of mass of the system, containing 3 identical masses evenly distributed throughout the orbit will also be stable. For other solutions, we have to make the assumption that the third object has negligible mass (which is often valid, given the astronomical contexts). Then, the five Lagrange points also become solutions for the third mass given two masses in a stable orbit. L1, L2 and L3 are all collinear with the first two bodies, but are divergent in their neighbourhood. L4 and L5 are 60 degrees in front of and behind the second mass, and have converging neighbourhoods (but only if M1/M2 is greater than about 25). Natural satellites can be found at the L4/L5 points in star-planet systems (known as the Trojans, derived from the name given to such asteroids of the Sun-Jupiter system) because of its stability. The JWST is also positioned near L2 of the Sun-Earth system because the Sun is bright and hot which is bad for telescope, and L2 is the furthest possible stationary point for the third mass from the Sun.
     </div>
 

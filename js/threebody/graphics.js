@@ -1,35 +1,30 @@
 var graphics = (function() {
     var canvas = null, // Canvas DOM element.
-        context = null, // Canvas context for drawing.
-        canvasHeight = 600,
-        // The scaling factor used to draw dists between the objects and their sizes
-        // Updated automatically on first draw
-        metersPerPixel = 100,
-        minimumSizePixels=10, // Minimum size of an object in pixels.
-        maximumSizePixels=80, // Maximum size of an object in pixels.
-        colors = {
-            orbitalPaths: ["#d72e3a","#4ccdd2","#6746ff"],
-        },
-        // Positions of three bodies in pixels on screen
-        bodyPositions = [
-            {x: null, y: null},
-            {x: null, y: null},
-            {x: null, y: null}
-        ],
-        // Previously drawn positions of the two bodies. Used to draw orbital line.
-        previousBodyPositions = [
-            {x: null, y: null},
-            {x: null, y: null},
-            {x: null, y: null}
-        ],
-        // Contains the DOM elements of the bodies
-        bodyElemenets = [],
-        // Body sizes in pixels
-        currentBodySizes = [
-            10, 10, 10
-        ],
-        middleX = 1,
-        middleY = 1;
+    context = null, // Canvas context for drawing.
+    canvasHeight = 600,
+    metersPerPixel = 100,
+    minimumSizePixels=10, // Minimum size of an object in pixels.
+    maximumSizePixels=80, // Maximum size of an object in pixels.
+    colors = {
+        orbitalPaths: ["#d72e3a","#4ccdd2","#6746ff"],
+    },
+    bodyPositions = [
+        {x: null, y: null},
+        {x: null, y: null},
+        {x: null, y: null}
+    ],
+    previousBodyPositions = [
+        {x: null, y: null},
+        {x: null, y: null},
+        {x: null, y: null}
+    ],
+    bodyElements = [],
+    currentBodySizes = [
+        10, 10, 10
+    ],
+    middleX = 1,
+    middleY = 1,
+    lineWidth = 1;
 
 
     function drawBody(position, size, bodyElement) {
@@ -51,7 +46,7 @@ var graphics = (function() {
                 currentBodySizes[iBody] = maximumSizePixels;
             }
 
-            bodyElemenets[iBody].style.width = currentBodySizes[iBody] + "px";
+            bodyElements[iBody].style.width = currentBodySizes[iBody] + "px";
         }
     }
 
@@ -63,7 +58,7 @@ var graphics = (function() {
         }
 
         context.beginPath();
-        context.lineWidth = 2
+        context.lineWidth = lineWidth
         context.strokeStyle = color;
         context.moveTo(previousPosition.x, previousPosition.y);
         context.lineTo(newPosition.x, newPosition.y);
@@ -94,7 +89,7 @@ var graphics = (function() {
         // Loop through the bodies
         for (var iBody = 0; iBody < bodyPositions.length; iBody++) {
             var bodyPosition = bodyPositions[iBody];
-            drawBody(bodyPosition, currentBodySizes[iBody], bodyElemenets[iBody]);
+            drawBody(bodyPosition, currentBodySizes[iBody], bodyElements[iBody]);
         }
     }
 
@@ -111,7 +106,7 @@ var graphics = (function() {
 
         // Adjust the canvas to the size of the screen
         canvasHeight = Math.min(window.innerHeight, window.innerWidth) - 100;
-        document.querySelector(".TBP-container").style.height = canvasHeight + 'px';
+        document.querySelector(".container").style.height = canvasHeight + 'px';
 
         canvas.style.width='100%';
         canvas.style.height= canvasHeight + 'px';
@@ -122,7 +117,7 @@ var graphics = (function() {
     // Returns true on error and false on success
     function initCanvas() {
         // Find the canvas HTML element
-        canvas = document.querySelector(".TBP-canvas");
+        canvas = document.querySelector(".canvas");
 
         // Check if the browser supports canvas drawing
         if (!(window.requestAnimationFrame && canvas && canvas.getContext)) { return true; }
@@ -138,14 +133,14 @@ var graphics = (function() {
         initCanvas();
         fitToContainer();
 
-        const mass1Element = document.querySelector(".TBP-mass1");
-        const mass2Element = document.querySelector(".TBP-mass2");
-        const mass3Element = document.querySelector(".TBP-mass3");
+        const mass1Element = document.querySelector(".mass1");
+        const mass2Element = document.querySelector(".mass2");
+        const mass3Element = document.querySelector(".mass3");
 
-        bodyElemenets = [];
-        bodyElemenets.push(mass1Element);
-        bodyElemenets.push(mass2Element);
-        bodyElemenets.push(mass3Element);
+        bodyElements = [];
+        bodyElements.push(mass1Element);
+        bodyElements.push(mass2Element);
+        bodyElements.push(mass3Element);
 
         success();
     }
@@ -169,6 +164,7 @@ var graphics = (function() {
         updateObjectSizes: updateObjectSizes,
         clearScene: clearScene,
         calculateNewPositions: calculateNewPositions,
-        init: init
+        init: init,
+        lineWidth: lineWidth
     };
 })();

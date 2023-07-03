@@ -191,15 +191,6 @@ var physics = (function() {
         rungeKutta.calculate(timestep, state.u, derivative);
     }
 
-    function calculateNewPosition() {
-        // Loop through the bodies
-        for (var iBody = 0; iBody < initialConditions.bodies; iBody++) {
-            var bodyStart = iBody * 4; // Starting index for current body in the u array
-
-            state.positions[iBody].x = state.u[bodyStart + 0];
-            state.positions[iBody].y = state.u[bodyStart + 1];
-        }
-    }
 
     // Returns the largest dist of an object from the center based on initial considitions
     function largestDistMeters() {
@@ -231,7 +222,6 @@ var physics = (function() {
     return {
         resetStateToInitialConditions: resetStateToInitialConditions,
         updatePosition: updatePosition,
-        calculateNewPosition: calculateNewPosition,
         initialConditions: initialConditions,
         state: state,
         calculateDiameters: calculateDiameters,

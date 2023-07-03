@@ -5,11 +5,11 @@ body {
     color-scheme: dark;
 }
 
-.TBP-hasTopMarginSmall {
+.hasTopMarginSmall {
     margin-top: 5px;
 }
 
-.TBP-hasNegativeBottomMarginNormal {
+.hasNegativeBottomMarginNormal {
     margin-bottom: -10px;
 }
 
@@ -32,12 +32,7 @@ body {
 
 }
 
-/*
-  Elements
-  --------
-*/
-
-.TBP-container {
+.container {
     position: relative;
     height: 700px;
     border: 1px solid #888;
@@ -45,10 +40,10 @@ body {
     overflow: hidden;
 }
 
-.TBP-isTextCentered { text-align: center; }
+.isTextCentered { text-align: center; }
 
 
-.TBP-centerOfMass {
+.centerOfMass {
     position: absolute;
     width: 11px;
     top: 50%;
@@ -58,9 +53,9 @@ body {
     z-index: 998;
 }
 
-.TBP-mass2,
-.TBP-mass3,
-.TBP-mass1 {
+.mass2,
+.mass3,
+.mass1 {
     position: absolute;
     width: 60px;
     top: -1000px;
@@ -68,14 +63,14 @@ body {
     z-index: 1000;
 }
 
-.TBP-bodyImage {
+.bodyImage {
     position: absolute;
     width: 100%;
     top: 0px;
     left: 0px;
 }
 
-.TBP-spin {
+.spin {
     -webkit-animation:spin .5s linear infinite;
     -moz-animation:spin .5s linear infinite;
     animation:spin .5s linear infinite;
@@ -85,7 +80,7 @@ body {
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
 
-.TBP-canvas { display: block; }
+.canvas { display: block; }
 
 /* Prevent browser from showing selection when the element is touched */
 .isUnselectable {
@@ -104,14 +99,14 @@ body {
     margin: .7rem 0;
 }
 
-.TBP-sliderMass1.ModeratelyUnwellSlider {
+.sliderMass1.ModeratelyUnwellSlider {
     accent-color: #d72e3a;
 }
 
-.TBP-sliderMass2.ModeratelyUnwellSlider {
+.sliderMass2.ModeratelyUnwellSlider {
     accent-color: #4ccdd2;
 }
 
-.TBP-sliderMass3.ModeratelyUnwellSlider {
+.sliderMass3.ModeratelyUnwellSlider {
     accent-color: #6746ff;
 }

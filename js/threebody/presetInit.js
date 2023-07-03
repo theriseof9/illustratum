@@ -4,7 +4,7 @@ var simulations = (function(){
     };
 
     function didClickElement(element) {
-        if (!classHelper.hasClass(element, "TBP-preset")) {
+        if (!classHelper.hasClass(element, "preset")) {
             didClickElement(element.parentElement);
             return;
         }
@@ -24,7 +24,7 @@ var simulations = (function(){
     }
 
     function init() {
-        var presetElement = document.querySelector(".TBP-preset");
+        var presetElement = document.querySelector(".preset");
         presetElement.onchange = didClick;
         return allPresets.FigureEight;
     }

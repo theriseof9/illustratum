@@ -1,0 +1,159 @@
+<style>
+
+  /*
+    Layout
+    --------
+  */
+
+  .EarthOrbitSimulation-hasTopMarginNormal {
+    margin-top: 15px;
+  }
+
+  .EarthOrbitSimulation-hasNegativeBottomMarginNormal {
+    margin-bottom: -10px;
+  }
+
+  /*
+    Elements
+    --------
+  */
+
+  .EarthOrbitSimulation-alert {
+    color: red;
+    border: 1px solid red;
+    background: #ffeeee;
+    padding: 5px;
+  }
+
+  .EarthOrbitSimulation-container {
+    background-color: #000000;
+    position: relative;
+    height: 400px;
+    background-image: url("https://evgenii.com/image/blog/2018-08-17-two-body-problem-simulator/starry_night.png");
+    background-position: center bottom;
+    background-repeat: repeat;
+    background-size: 874px 260px;
+  }
+
+  .EarthOrbitSimulation-isTextCentered { text-align: center; }
+
+
+  .EarthOrbitSimulation-centerOfMass {
+    position: absolute;
+    width: 11px;
+    top: 50%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -5px;
+    z-index: 998;
+  }
+
+  /*.EarthOrbitSimulation-earth {*/
+  /*  position: absolute;*/
+  /*  width: 60px;*/
+  /*  top: -1000px;*/
+  /*  -webkit-animation:spin .1s linear infinite;*/
+  /*  -moz-animation:spin .1s linear infinite;*/
+  /*  animation:spin .10s linear infinite;*/
+  /*  z-index: 1000;*/
+  /*}*/
+
+  /*.EarthOrbitSimulation-sun {*/
+  /*  position: absolute;*/
+  /*  width: 60px;*/
+  /*  top: -1000px;*/
+  /*  -webkit-animation:spin .5s linear infinite;*/
+  /*  -moz-animation:spin .5s linear infinite;*/
+  /*  animation:spin .5s linear infinite;*/
+  /*  z-index: 1001;*/
+  /*}*/
+
+  @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+  @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+  @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+  .EarthOrbitSimulation-canvas { display: block; }
+
+  /*
+    Hud display
+    ---------
+  */
+
+  .EarthOrbitSimulation-hudContainer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+  }
+
+  .EarthOrbitSimulation-hudContainerChild {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*
+    Reload button
+    ---------
+  */
+
+  .EarthOrbitSimulation-reload {
+    position: absolute;
+    display: block;
+    bottom: 10px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    outline: none;
+  }
+
+  .EarthOrbitSimulation-reload:focus { outline: none; }
+
+  .EarthOrbitSimulation-reloadIcon {
+    width: 100%;
+    border : 0;
+  }
+
+  .EarthOrbitSimulation-massSlider,
+  .EarthOrbitSimulation-eccentricitySlider {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+</style>
+
+<link rel="stylesheet" href="index.css">
+<script src="js/twobody/utils.js"></script>
+<script src="js/threebody/physics.js"></script>
+<script src="js/twobody/graphics.js"></script>
+<script src="js/twobody/physics.js"></script>
+<script src="js/twobody/simulation.js"></script>
+<div class="container isFullScreenWide isUnselectable">
+  <img src='img/mass1.png' alt='Earth' class='mass1'>
+  <img src='img/mass2.png' alt='Earth' class='mass2'>
+  <img src='img/add_FILL0_wght400_GRAD0_opsz48.svg' alt='Earth' class='EarthOrbitSimulation-centerOfMass'>
+
+  <canvas class="EarthOrbitSimulation-canvas"></canvas>
+  <div class='EarthOrbitSimulation-hudContainer'>
+    <div class='EarthOrbitSimulation-hudContainerChild'>
+      <a class='EarthOrbitSimulation-reload' href='#'><img src='https://evgenii.com/image/blog/2016-09-17-ridiculous-strawberry-picking/reload_icon.png' alt='Restart' class='EarthOrbitSimulation-reloadIcon'></a>
+    </div>
+  </div>
+</div>
+
+<div class='EarthOrbitSimulation-isTextCentered EarthOrbitSimulation-hasTopMarginNormal EarthOrbitSimulation-hasNegativeBottomMarginNormal isUnselectable'>
+  Mass ratio: <span class='EarthOrbitSimulation-sunsMass'>0.10</span>
+</div>
+<input type="range" class="isUnselectable ModeratelyUnwellSlider" id="mass-ratio" max="1" step="0.001">
+<div class='EarthOrbitSimulation-isTextCentered EarthOrbitSimulation-hasTopMarginNormal EarthOrbitSimulation-hasNegativeBottomMarginNormal isUnselectable'>
+  Eccentricity: <span class='EarthOrbitSimulation-eccentricity'>0.10</span>
+</div>
+<input type="range" class="isUnselectable ModeratelyUnwellSlider" id="eccentricity" max="1" step="0.001">
+<script>
+  userInput.init();
+  simulation.start();
+</script>

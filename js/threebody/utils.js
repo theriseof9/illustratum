@@ -40,6 +40,11 @@ var userInput = (function(){
         sliderLabelElement.innerText = sliderText;
     }
 
+    function didUpdateLineWidthSlider(sliderValue) {
+        console.log(sliderValue);
+        graphics.lineWidth = 5
+    }
+
     function getCurrentSliderSettings() {
         var sliderSettings;
 
@@ -125,9 +130,9 @@ var userInput = (function(){
     }
 
     function resetSlider() {
-        classHelper.removeClass(sliderElement, "TBP-sliderMass1");
-        classHelper.removeClass(sliderElement, "TBP-sliderMass2");
-        classHelper.removeClass(sliderElement, "TBP-sliderMass3");
+        classHelper.removeClass(sliderElement, "sliderMass1");
+        classHelper.removeClass(sliderElement, "sliderMass2");
+        classHelper.removeClass(sliderElement, "sliderMass3");
 
         var sliderSettings = getCurrentSliderSettings();
         var simulationValue = getCurrentSimulationValue(physics.initialConditions);
@@ -137,13 +142,13 @@ var userInput = (function(){
             sliderText = formatMassForSlider(physics.initialConditions.masses[currentMassSliderIndex]);
             switch(currentMassSliderIndex) {
                 case 0:
-                    classHelper.addClass(sliderElement, "TBP-sliderMass1");
+                    classHelper.addClass(sliderElement, "sliderMass1");
                     break;
                 case 1:
-                    classHelper.addClass(sliderElement, "TBP-sliderMass2");
+                    classHelper.addClass(sliderElement, "sliderMass2");
                     break;
                 default:
-                    classHelper.addClass(sliderElement, "TBP-sliderMass3");
+                    classHelper.addClass(sliderElement, "sliderMass3");
             }
         } else {
             console.log("time")
@@ -184,8 +189,8 @@ var userInput = (function(){
     }
 
     function init() {
-        sliderLabelElement = document.querySelector(".TBP-sliderLabel");
-        sliderDropdown = document.querySelector(".TBP-sliderDropdown");
+        sliderLabelElement = document.querySelector(".sliderLabel");
+        sliderDropdown = document.querySelector(".sliderDropdown");
         sliderElement = document.getElementById('ok-but');
         lineWidthSlider = document.getElementById("ok-but-width")
 
@@ -194,8 +199,8 @@ var userInput = (function(){
         simulations.content.didChangeModel = didChangeModel;
 
         sliderElement.oninput = e => didUpdateSlider(e.currentTarget.value)
+        lineWidthSlider.oninput = e => didUpdateLineWidthSlider(e.currentTarget.value)
         resetSlider();
-
         sliderDropdown.onchange = didClickSliderDropdown;
     }
 
