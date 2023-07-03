@@ -3,21 +3,19 @@ var userInput = (function(){
     var currentSlider = "mass";
     var currentMassSliderIndex = 0;
 
-    // Returns the output value of the slider between 0 to 1 corresponding to the
-    // default value of the variable (such as default mass for an object)
     function calculateDefaultSliderOutput(sliderSettings) {
         var defaultValue = getCurrentSimulationValue(currentModel);
         return (defaultValue - sliderSettings.min) / (sliderSettings.max - sliderSettings.min);
     }
 
-    function didUpdateSlider(sliderValue) {
+    function didUpdateSliderLog(sliderValue) {
         var sliderText;
         var sliderSettings = getCurrentSliderSettings();
         console.log('updated to', sliderValue)
 
         if (sliderSettings.power !== undefined) {
 
-            if (sliderSettings.power % 2 === 1) { // Odd power
+            if (sliderSettings.power % 2 === 1) {
                 var defaultOutput = calculateDefaultSliderOutput(sliderSettings);
                 sliderValue = oddPowerCurve.sliderOutputValue(defaultOutput, sliderValue, sliderSettings.power);
             } else {
@@ -112,11 +110,12 @@ var userInput = (function(){
         }
         return {unit: 'century', value: time};
     }
+
     function didClickRestart() {
         physics.resetStateToInitialConditions();
         graphics.clearScene(physics.largestDistMeters());
         graphics.updateObjectSizes(physics.calculateDiameters());
-        return false; // Prevent default
+        return false;
     }
 
     function getCurrentSimulationValue(model) {
@@ -188,6 +187,49 @@ var userInput = (function(){
         resetSlider()
     }
 
+    // Two body functions
+    var massSlider, eccentricitySlider, sunsMassElement, eccentricityElement;
+
+    function didUpdateMassSlider(sliderValue) {
+        if (sliderValue === 0) { sliderValue = 0.005; }
+        var oldEccentricity = physics_twobody.state.eccentricity;
+        physics_twobody.resetStateToInitialConditions();
+        graphics.clearScene();
+        physics_twobody.updateMassRatioFromUserInput(sliderValue);
+        physics_twobody.updateEccentricityFromUserInput(oldEccentricity);
+        graphics.updateObjectSizes(physics_twobody.state.masses.q, physics_twobody.separationBetweenObjects());
+        showMassRatio(sliderValue);
+    }
+
+    function didUpdateEccentricitySlider(sliderValue) {
+        var oldMassRatio = physics_twobody.state.masses.q;
+        physics_twobody.resetStateToInitialConditions();
+        graphics.clearScene();
+        physics_twobody.updateMassRatioFromUserInput(oldMassRatio);
+        physics_twobody.updateEccentricityFromUserInput(sliderValue);
+        showEccentricity(sliderValue);
+        graphics.updateObjectSizes(physics_twobody.state.masses.q, physics_twobody.separationBetweenObjects());
+    }
+
+    function showMassRatio(ratio) {
+        sunsMassElement.innerHTML = parseFloat(Math.round(ratio*100)/100).toFixed(2);
+    }
+
+    function showEccentricity(ratio) {
+        eccentricityElement.innerHTML = parseFloat(Math.round(ratio * 100) / 100).toFixed(2);
+    }
+
+    function didClickRestartTwoBody() {
+        physics_twobody.resetStateToInitialConditions();
+        graphics.clearScene();
+        showMassRatio(physics_twobody.initialConditions.q);
+        showEccentricity(physics_twobody.initialConditions.eccentricity);
+        massSlider.changePosition(physics_twobody.initialConditions.q);
+        eccentricitySlider.changePosition(physics_twobody.initialConditions.eccentricity);
+        graphics.updateObjectSizes(physics_twobody.initialConditions.q, physics_twobody.separationBetweenObjects());
+        return false;
+    }
+
     function init() {
         sliderLabelElement = document.querySelector(".sliderLabel");
         sliderDropdown = document.querySelector(".sliderDropdown");
@@ -198,13 +240,61 @@ var userInput = (function(){
         physics.changeInitialConditions(currentModel);
         simulations.content.didChangeModel = didChangeModel;
 
-        sliderElement.oninput = e => didUpdateSlider(e.currentTarget.value)
+        sliderElement.oninput = e => didUpdateSliderLog(e.currentTarget.value)
         lineWidthSlider.oninput = e => didUpdateLineWidthSlider(e.currentTarget.value)
         resetSlider();
         sliderDropdown.onchange = didClickSliderDropdown;
+
+        sunsMassElement = document.querySelector(".EarthOrbitSimulation-sunsMass");
+        eccentricityElement = document.querySelector(".EarthOrbitSimulation-eccentricity");
+        massSlider = document.getElementById("mass-ratio");
+        eccentricitySlider = document.getElementById("eccentricity");
+
+        massSlider.oninput = e => didUpdateMassSlider(e.currentTarget.value)
+        eccentricitySlider.oninput = e => didUpdateEccentricitySlider(e.currentTarget.value)
+
+        showMassRatio(physics_twobody.initialConditions.q);
+        massSlider.value = physics_twobody.initialConditions.q;
+        showEccentricity(physics_twobody.initialConditions.eccentricity);
+        eccentricitySlider.value = physics_twobody.initialConditions.eccentricity;
     }
 
     return {
         init: init
+    };
+})();
+
+var rungeKutta = (function() {
+    // h: timestep
+    // u: variables
+    // derivative: function that calculates the derivatives
+    function calculate(h, u, derivative) {
+        var a = [h/2, h/2, h, 0];
+        var b = [h/6, h/3, h/3, h/6];
+        var u0 = [];
+        var ut = [];
+        var dimension = u.length;
+
+        for (var i = 0; i < dimension; i++) {
+            u0.push(u[i]);
+            ut.push(0);
+        }
+
+        for (var j = 0; j < 4; j++) {
+            var du = derivative();
+
+            for (i = 0; i < dimension; i++) {
+                u[i] = u0[i] + a[j]*du[i];
+                ut[i] = ut[i] + b[j]*du[i];
+            }
+        }
+
+        for (i = 0; i < dimension; i++) {
+            u[i] = u0[i] + ut[i];
+        }
+    }
+
+    return {
+        calculate: calculate
     };
 })();

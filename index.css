@@ -63,6 +63,16 @@ body {
     z-index: 1000;
 }
 
+.mass1-twobody,
+.mass2-twobody {
+    position: absolute;
+    width: 60px;
+    top: -1000px;
+    left: -1000px;
+    z-index: 1000;
+}
+
+
 .bodyImage {
     position: absolute;
     width: 100%;

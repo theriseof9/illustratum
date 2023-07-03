@@ -1,4 +1,4 @@
-var graphics = (function() {
+var graphics_twobody = (function() {
     var canvas = null, // Canvas DOM element.
         context = null, // Canvas context for drawing.
         canvasHeight = 400,
@@ -115,8 +115,8 @@ var graphics = (function() {
 
         // Update the size of the canvas
         fitToContainer();
-        sunElement = document.querySelector(".mass1");
-        earthElement = document.querySelector(".mass2");
+        sunElement = document.querySelector(".mass1-twobody");
+        earthElement = document.querySelector(".mass2-twobody");
 
         // Execute success callback function
         success();

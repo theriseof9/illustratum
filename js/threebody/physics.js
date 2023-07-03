@@ -1,38 +1,3 @@
-var rungeKutta = (function() {
-    // h: timestep
-    // u: variables
-    // derivative: function that calculates the derivatives
-    function calculate(h, u, derivative) {
-        var a = [h/2, h/2, h, 0];
-        var b = [h/6, h/3, h/3, h/6];
-        var u0 = [];
-        var ut = [];
-        var dimension = u.length;
-
-        for (var i = 0; i < dimension; i++) {
-            u0.push(u[i]);
-            ut.push(0);
-        }
-
-        for (var j = 0; j < 4; j++) {
-            var du = derivative();
-
-            for (i = 0; i < dimension; i++) {
-                u[i] = u0[i] + a[j]*du[i];
-                ut[i] = ut[i] + b[j]*du[i];
-            }
-        }
-
-        for (i = 0; i < dimension; i++) {
-            u[i] = u0[i] + ut[i];
-        }
-    }
-
-    return {
-        calculate: calculate
-    };
-})();
-
 var physics = (function() {
     var constants = {
         gravitationalConstant: 6.67408 * Math.pow(10, -11),

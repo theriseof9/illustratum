@@ -1,4 +1,4 @@
-var physics = (function() {
+var physics_twobody = (function() {
     // Current state of the system
     var state = {
         u: [0, 0, 0, 0],

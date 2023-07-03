@@ -7,13 +7,19 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="twobody.css">
+    <script src="js/shared/utils.js"></script>
     <script src="js/threebody/math.js"></script>
     <script src="js/threebody/presetInit.js"></script>
     <script src="js/threebody/presets.js"></script>
     <script src="js/threebody/physics.js"></script>
     <script src="js/threebody/simulation.js"></script>
     <script src="js/threebody/graphics.js"></script>
-    <script src="js/threebody/utils.js"></script>
+    <script src="js/twobody/simulation.js"></script>
+    <script src="js/threebody/presetInit.js"></script>
+    <script src="js/threebody/physics.js"></script>
+    <script src="js/twobody/graphics.js"></script>
+    <script src="js/twobody/physics.js"></script>
     <title>Three Body problem</title>
 </head>
 <body>
@@ -76,7 +82,28 @@
         <h2>The Equations of the Two Body Problem</h2>
         In the Two Body Problem, the two bodies exert a gravitational force on each other. To express this mathematically, we let the two bodies have masses $m_1$ and $m_2$, and let the distance between them be $r$. Then at any point in time, we always have $$m_1a_1=\frac{Gm_1m_2}{r^2}$$ and $$m_2a_2=-\frac{Gm_1m_2}{r^2}.$$ The minus sign in the second equation is due to Newton’s Third Law, since the forces act in opposite directions. These two equations can be solved to yield a general solution to the Two Body Problem.
         <br><br> In the general solution, the two bodies will orbit around their centre of mass in an elliptical orbit, as shown below.
+        <link rel="stylesheet" href="index.css">
+        <div class="container isFullScreenWide isUnselectable">
+            <img src='img/mass1.png' alt='Earth' class='mass1-twobody'>
+            <img src='img/mass2.png' alt='Earth' class='mass2-twobody'>
+            <img src='img/add_FILL0_wght400_GRAD0_opsz48.svg' alt='Earth' class='EarthOrbitSimulation-centerOfMass'>
 
+            <canvas class="EarthOrbitSimulation-canvas"></canvas>
+            <div class='EarthOrbitSimulation-hudContainer'>
+                <div class='EarthOrbitSimulation-hudContainerChild'>
+                    <a class='EarthOrbitSimulation-reload' href='#'><img src='https://evgenii.com/image/blog/2016-09-17-ridiculous-strawberry-picking/reload_icon.png' alt='Restart' class='EarthOrbitSimulation-reloadIcon'></a>
+                </div>
+            </div>
+        </div>
+
+        <div class='EarthOrbitSimulation-isTextCentered EarthOrbitSimulation-hasTopMarginNormal EarthOrbitSimulation-hasNegativeBottomMarginNormal isUnselectable'>
+            Mass ratio: <span class='EarthOrbitSimulation-sunsMass'>0.10</span>
+        </div>
+        <input type="range" class="isUnselectable ModeratelyUnwellSlider" id="mass-ratio" max="1" step="0.001">
+        <div class='EarthOrbitSimulation-isTextCentered EarthOrbitSimulation-hasTopMarginNormal EarthOrbitSimulation-hasNegativeBottomMarginNormal isUnselectable'>
+            Eccentricity: <span class='EarthOrbitSimulation-eccentricity'>0.10</span>
+        </div>
+        <input type="range" class="isUnselectable ModeratelyUnwellSlider" id="eccentricity" max="1" step="0.001">
     </div>
     <div class="sect">
         <h1>The Chaos of the Three Body Problem</h1>
@@ -92,6 +119,7 @@
 
     <script>
         userInput.init();
+        simulation_twobody.start();
         simulation.start();
     </script>
 </body>

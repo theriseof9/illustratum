@@ -1,22 +1,18 @@
-var simulation = (function() {
-    // The method is called 60 times per second
+var simulation_twobody = (function() {
     function animate() {
-        physics.updatePosition();
-        graphics.drawScene(physics.state.positions);
+        physics_twobody.updatePosition();
+        graphics_twobody.drawScene(physics_twobody.state.positions);
         window.requestAnimationFrame(animate);
     }
 
     function start() {
-        graphics.init(function() {
-            // Use the initial conditions for the simulation
-            physics.resetStateToInitialConditions();
-            graphics.updateObjectSizes(physics.initialConditions.q, physics.separationBetweenObjects());
-
-            // Redraw the scene if page is resized
+        graphics_twobody.init(function() {
+            physics_twobody.resetStateToInitialConditions();
+            graphics_twobody.updateObjectSizes(physics_twobody.initialConditions.q, physics_twobody.separationBetweenObjects());
             window.addEventListener('resize', function(event){
-                graphics.fitToContainer();
-                graphics.clearScene();
-                graphics.drawScene(physics.state.positions);
+                graphics_twobody.fitToContainer();
+                graphics_twobody.clearScene();
+                graphics_twobody.drawScene(physics_twobody.state.positions);
             });
 
             animate();
