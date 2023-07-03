@@ -14,7 +14,6 @@ var simulation_twobody = (function() {
                 graphics_twobody.clearScene();
                 graphics_twobody.drawScene(physics_twobody.state.positions);
             });
-
             animate();
         });
     }

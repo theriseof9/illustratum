@@ -79,10 +79,6 @@ var graphics_twobody = (function() {
         drawOrbitalLine(body2Position, previousBodyPositions[1]);
     }
 
-    function showCanvasNotSupportedMessage() {
-        document.getElementById("EarthOrbitSimulation-notSupportedMessage").style.display ='block';
-    }
-
     // Resize canvas to will the width of container
     function fitToContainer(){
         canvas.style.width='100%';
@@ -91,27 +87,19 @@ var graphics_twobody = (function() {
         canvas.height = canvas.offsetHeight;
     }
 
-    // Returns true on error and false on success
-    function initCanvas() {
-        // Find the canvas HTML element
-        canvas = document.querySelector(".EarthOrbitSimulation-canvas");
 
-        // Check if the browser supports canvas drawing
+    function initCanvas() {
+        canvas = document.getElementById("canvas-tbp");
+
         if (!(window.requestAnimationFrame && canvas && canvas.getContext)) { return true; }
 
-        // Get canvas context for drawing
         context = canvas.getContext("2d");
-        if (!context) { return true; } // Error, browser does not support canvas
         return false;
     }
 
     // Create canvas for drawing and call success argument
     function init(success) {
-        if (initCanvas()) {
-            // The browser can not use canvas. Show a warning message.
-            showCanvasNotSupportedMessage();
-            return;
-        }
+        initCanvas();
 
         // Update the size of the canvas
         fitToContainer();

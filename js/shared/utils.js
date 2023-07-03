@@ -191,24 +191,25 @@ var userInput = (function(){
     var massSlider, eccentricitySlider, sunsMassElement, eccentricityElement;
 
     function didUpdateMassSlider(sliderValue) {
+        console.log("Updated")
         if (sliderValue === 0) { sliderValue = 0.005; }
         var oldEccentricity = physics_twobody.state.eccentricity;
         physics_twobody.resetStateToInitialConditions();
-        graphics.clearScene();
+        graphics_twobody.clearScene();
         physics_twobody.updateMassRatioFromUserInput(sliderValue);
         physics_twobody.updateEccentricityFromUserInput(oldEccentricity);
-        graphics.updateObjectSizes(physics_twobody.state.masses.q, physics_twobody.separationBetweenObjects());
+        graphics_twobody.updateObjectSizes(physics_twobody.state.masses.q, physics_twobody.separationBetweenObjects());
         showMassRatio(sliderValue);
     }
 
     function didUpdateEccentricitySlider(sliderValue) {
         var oldMassRatio = physics_twobody.state.masses.q;
         physics_twobody.resetStateToInitialConditions();
-        graphics.clearScene();
+        graphics_twobody.clearScene();
         physics_twobody.updateMassRatioFromUserInput(oldMassRatio);
         physics_twobody.updateEccentricityFromUserInput(sliderValue);
         showEccentricity(sliderValue);
-        graphics.updateObjectSizes(physics_twobody.state.masses.q, physics_twobody.separationBetweenObjects());
+        graphics_twobody.updateObjectSizes(physics_twobody.state.masses.q, physics_twobody.separationBetweenObjects());
     }
 
     function showMassRatio(ratio) {
@@ -221,12 +222,12 @@ var userInput = (function(){
 
     function didClickRestartTwoBody() {
         physics_twobody.resetStateToInitialConditions();
-        graphics.clearScene();
+        graphics_twobody.clearScene();
         showMassRatio(physics_twobody.initialConditions.q);
         showEccentricity(physics_twobody.initialConditions.eccentricity);
         massSlider.changePosition(physics_twobody.initialConditions.q);
         eccentricitySlider.changePosition(physics_twobody.initialConditions.eccentricity);
-        graphics.updateObjectSizes(physics_twobody.initialConditions.q, physics_twobody.separationBetweenObjects());
+        graphics_twobody.updateObjectSizes(physics_twobody.initialConditions.q, physics_twobody.separationBetweenObjects());
         return false;
     }
 
@@ -244,6 +245,8 @@ var userInput = (function(){
         lineWidthSlider.oninput = e => didUpdateLineWidthSlider(e.currentTarget.value)
         resetSlider();
         sliderDropdown.onchange = didClickSliderDropdown;
+
+        // Two body
 
         sunsMassElement = document.querySelector(".EarthOrbitSimulation-sunsMass");
         eccentricityElement = document.querySelector(".EarthOrbitSimulation-eccentricity");

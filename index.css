@@ -40,6 +40,15 @@ body {
     overflow: hidden;
 }
 
+.container-tbp {
+    position: relative;
+    height: 400px;
+    background-position: center bottom;
+    background-repeat: repeat;
+    background-size: 874px 260px;
+
+}
+
 .isTextCentered { text-align: center; }
 
 
@@ -63,14 +72,47 @@ body {
     z-index: 1000;
 }
 
-.mass1-twobody,
+/*.mass1-twobody,*/
+/*.mass2-twobody {*/
+/*    position: absolute;*/
+/*    width: 60px;*/
+/*    top: -1000px;*/
+/*    left: -1000px;*/
+/*    z-index: 1000;*/
+/*}*/
+
+
+
+/*.EarthOrbitSimulation-centerOfMass {*/
+/*    position: absolute;*/
+/*    width: 11px;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    margin-left: -5px;*/
+/*    margin-top: -5px;*/
+/*    z-index: 998;*/
+/*}*/
+
 .mass2-twobody {
     position: absolute;
     width: 60px;
     top: -1000px;
-    left: -1000px;
+    -webkit-animation:spin .1s linear infinite;
+    -moz-animation:spin .1s linear infinite;
+    animation:spin .10s linear infinite;
     z-index: 1000;
 }
+
+.mass1-twobody {
+    position: absolute;
+    width: 60px;
+    top: -1000px;
+    -webkit-animation:spin .5s linear infinite;
+    -moz-animation:spin .5s linear infinite;
+    animation:spin .5s linear infinite;
+    z-index: 1001;
+}
+
 
 
 .bodyImage {
@@ -92,7 +134,7 @@ body {
 
 .canvas { display: block; }
 
-/* Prevent browser from showing selection when the element is touched */
+
 .isUnselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none; /* Chrome/Safari */
