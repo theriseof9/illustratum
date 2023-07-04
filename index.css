@@ -3,21 +3,20 @@ body {
     background-color: #000000;
     color: #eee;
     color-scheme: dark;
-    margin-left: 400px;
-    margin-right: 400px;
-    max-width: 35em;
+    margin-left: 500px;
+    margin-right: 500px;
     text-justify: inter-word;
     text-align: justify;
     text-rendering: optimizelegibility;
     font-kerning: normal;
-    padding: 50px;
+    /*padding: 400px;*/
     font-size: 20px;
     line-height: 1.7em;
 
 }
 
 .no-justify {
-    text-align: left !important;
+    /*text-align: left !important;*/
 }
 
 .hasTopMarginSmall {
@@ -60,9 +59,6 @@ body {
 .container-tbp {
     position: relative;
     height: 500px;
-    background-position: center bottom;
-    background-repeat: repeat;
-    background-size: 874px 260px;
     margin-left: -500px;
     margin-right: -500px;
 }
