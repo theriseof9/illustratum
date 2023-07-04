@@ -26,6 +26,9 @@ var graphics = (function() {
     middleY = 1,
     lineWidth = 1;
 
+    function updateLineWidth(newWidth) {
+        lineWidth = newWidth
+    }
 
     function drawBody(position, size, bodyElement) {
         var left = (position.x - size/2) + 1000;
@@ -56,7 +59,6 @@ var graphics = (function() {
             previousPosition.y = newPosition.y;
             return;
         }
-
         context.beginPath();
         context.lineWidth = lineWidth
         context.strokeStyle = color;
@@ -165,6 +167,6 @@ var graphics = (function() {
         clearScene: clearScene,
         calculateNewPositions: calculateNewPositions,
         init: init,
-        lineWidth: lineWidth
+        updateLineWidth: updateLineWidth
     };
 })();

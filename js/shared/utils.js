@@ -39,8 +39,8 @@ var userInput = (function(){
     }
 
     function didUpdateLineWidthSlider(sliderValue) {
-        console.log(sliderValue);
-        graphics.lineWidth = 5
+        graphics.updateLineWidth(parseFloat(sliderValue)*5);
+        didClickRestart();
     }
 
     function getCurrentSliderSettings() {
@@ -245,6 +245,8 @@ var userInput = (function(){
         lineWidthSlider.oninput = e => didUpdateLineWidthSlider(e.currentTarget.value)
         resetSlider();
         sliderDropdown.onchange = didClickSliderDropdown;
+
+        lineWidthSlider.value = 0.2
 
         // Two body
 

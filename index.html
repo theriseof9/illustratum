@@ -16,6 +16,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="twobody.css">
+    <link rel="stylesheet" href="index.css">
     <script src="js/shared/utils.js"></script>
     <script src="js/threebody/math.js"></script>
     <script src="js/threebody/presetInit.js"></script>
@@ -31,7 +32,7 @@
     <title>Three Body problem</title>
 </head>
 <body>
-    <div class="container isFullScreenWide isUnselectable">
+    <div class="container isFullScreenWide isUnselectable no-justify">
         <div class='mass1'><img src='img/mass1.png' class='spin bodyImage' alt='Mass 1' /></div>
         <div class='mass2'><img src='img/mass2.png' alt='Mass 2' class='spin bodyImage'/></div>
         <div class='mass3'><img src='img/mass3.png' alt='Mass 3' class='spin bodyImage'/></div>
@@ -88,10 +89,9 @@
         <br><br> In other words, the gravitational force increases linearly with the mass of the planets and decreases quadratically (much faster) with the distance between them.
         <br><br> Sometimes, the gravitational force would also be written with a negative sign to signify that it is an attractive force.
         <h2>The Equations of the Two Body Problem</h2>
-        In the Two Body Problem, the two bodies exert a gravitational force on each other. To express this mathematically, we let the two bodies have masses $m_1$ and $m_2$, and let the distance between them be $r$. Then at any point in time, we always have $$m_1a_1=\frac{Gm_1m_2}{r^2} \qquad \text{and} \qquad m_2a_2=-\frac{Gm_1m_2}{r^2}.$$ The minus sign in the second equation is due to Newton's Third Law, since the forces act in opposite directions. These two equations can be solved to yield a general solution to the Two Body Problem. <a href="#urmother" onclick="setTimeout(function() {MathJax.typeset()}, 500)">:A nice solution</a>
+        In the Two Body Problem, the two bodies exert a gravitational force on each other. To express this mathematically, we let the two bodies have masses $m_1$ and $m_2$, and let the distance between them be $r$. Then at any point in time, we always have $$m_1a_1=\frac{Gm_1m_2}{r^2} \qquad \text{and} \qquad m_2a_2=-\frac{Gm_1m_2}{r^2}.$$ The minus sign in the second equation is due to Newton's Third Law, since the forces act in opposite directions. These two equations can be solved to yield a general solution to the Two Body Problem. <a href="#urmother" onclick="setTimeout(function() {MathJax.typeset()}, 500)" class="no-justify">:A nice solution to this problem</a>
         <br><br> In the general solution, the two bodies will orbit around their centre of mass in an elliptical orbit, as shown below.
-        <link rel="stylesheet" href="index.css">
-        <div class="container-tbp isFullScreenWide isUnselectable">
+        <div class="container-tbp isFullScreenWide isUnselectable no-justify">
             <img src='img/mass1.png' alt='Earth' class='mass1-twobody'>
             <img src='img/mass2.png' alt='Earth' class='mass2-twobody'>
             <img src='img/add_FILL0_wght400_GRAD0_opsz48.svg' alt='Earth' class='centerOfMass'>
@@ -119,7 +119,7 @@
         There are a few special case systems which yield stable solutions.
 
         <h2>Figure Eight</h2>
-        This solution consists of 3 equal masses moving around a figure-eight shape. In this simulation, the system will still remain stable if we change the mass of all three bodies a little bit, to 0.99 for example. However, it will become unstable if we change the mass too much. <a href="#urmother2">:Why?</a>
+        This solution consists of 3 equal masses moving around a figure-eight shape. In this simulation, the system will still remain stable if we change the mass of all three bodies a little bit, to 0.99 for example. However, it will become unstable if we change the mass too much. <br><a href="#urmother2">:Why?</a>
         <br><br>Just for fun, try increasing the speed of the simulation - at certain speeds, you will see weird stroboscopic effects. (Warning: this can make you dizzy.)
 
         <h2>Lagrange Point L5</h2>
