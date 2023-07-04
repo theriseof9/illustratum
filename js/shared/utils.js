@@ -253,8 +253,8 @@ var userInput = (function(){
         massSlider = document.getElementById("mass-ratio");
         eccentricitySlider = document.getElementById("eccentricity");
 
-        massSlider.oninput = e => didUpdateMassSlider(e.currentTarget.value)
-        eccentricitySlider.oninput = e => didUpdateEccentricitySlider(e.currentTarget.value)
+        massSlider.oninput = e => didUpdateMassSlider(parseFloat(e.currentTarget.value))
+        eccentricitySlider.oninput = e => didUpdateEccentricitySlider(parseFloat(e.currentTarget.value))
 
         showMassRatio(physics_twobody.initialConditions.q);
         massSlider.value = physics_twobody.initialConditions.q;

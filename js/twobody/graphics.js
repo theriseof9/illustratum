@@ -1,7 +1,7 @@
 var graphics_twobody = (function() {
     var canvas = null, // Canvas DOM element.
         context = null, // Canvas context for drawing.
-        canvasHeight = 400,
+        canvasHeight = 500,
         defaultBodySize = 80,
         colors = ["#4ccdd2", "#d72e3a"],
         // Previously drawn positions of the two bodies. Used to draw orbital line.
@@ -88,9 +88,7 @@ var graphics_twobody = (function() {
 
     function initCanvas() {
         canvas = document.getElementById("canvas-tbp");
-
         if (!(window.requestAnimationFrame && canvas && canvas.getContext)) { return true; }
-
         context = canvas.getContext("2d");
         return false;
     }

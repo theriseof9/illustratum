@@ -3,6 +3,8 @@ body {
     background-color: #000000;
     color: #eee;
     color-scheme: dark;
+    margin-left: 500px;
+    margin-right: 500px;
 }
 
 .hasTopMarginSmall {
@@ -38,15 +40,18 @@ body {
     border: 1px solid #888;
     border-radius: 12px;
     overflow: hidden;
+    margin-left: -500px;
+    margin-right: -500px;
 }
 
 .container-tbp {
     position: relative;
-    height: 400px;
+    height: 500px;
     background-position: center bottom;
     background-repeat: repeat;
     background-size: 874px 260px;
-
+    margin-left: -500px;
+    margin-right: -500px;
 }
 
 .isTextCentered { text-align: center; }

@@ -43,6 +43,7 @@ var physics_twobody = (function() {
     // Update parameters that depend on mass ratio and eccentricity
     function updateParametersDependentOnUserInput() {
         console.log("curr ecc", state.eccentricity)
+        console.log("curr mass", state.masses.m12)
         state.masses.m2 = state.masses.q;
         state.masses.m12 = state.masses.m1 + state.masses.m2;
         state.u[3] = initialVelocity(state.masses.q, state.eccentricity);
@@ -110,7 +111,7 @@ var physics_twobody = (function() {
     }
 
     function updateEccentricityFromUserInput(eccentricity) {
-        state.eccentricity = parseFloat(eccentricity);
+        state.eccentricity = eccentricity;
         updateParametersDependentOnUserInput();
     }
 

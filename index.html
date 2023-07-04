@@ -88,7 +88,7 @@
         <br><br> In other words, the gravitational force increases linearly with the mass of the planets and decreases quadratically (much faster) with the distance between them.
         <br><br> Sometimes, the gravitational force would also be written with a negative sign to signify that it is an attractive force.
         <h2>The Equations of the Two Body Problem</h2>
-        In the Two Body Problem, the two bodies exert a gravitational force on each other. To express this mathematically, we let the two bodies have masses $m_1$ and $m_2$, and let the distance between them be $r$. Then at any point in time, we always have $$m_1a_1=\frac{Gm_1m_2}{r^2} \qquad \text{and} \qquad m_2a_2=-\frac{Gm_1m_2}{r^2}.$$ The minus sign in the second equation is due to Newton’s Third Law, since the forces act in opposite directions. These two equations can be solved to yield a general solution to the Two Body Problem. <a href="#urmother" onclick="setTimeout(function() {MathJax.typeset()}, 1000)">:urmother</a>
+        In the Two Body Problem, the two bodies exert a gravitational force on each other. To express this mathematically, we let the two bodies have masses $m_1$ and $m_2$, and let the distance between them be $r$. Then at any point in time, we always have $$m_1a_1=\frac{Gm_1m_2}{r^2} \qquad \text{and} \qquad m_2a_2=-\frac{Gm_1m_2}{r^2}.$$ The minus sign in the second equation is due to Newton's Third Law, since the forces act in opposite directions. These two equations can be solved to yield a general solution to the Two Body Problem. <a href="#urmother" onclick="setTimeout(function() {MathJax.typeset()}, 500)">:A nice solution</a>
         <br><br> In the general solution, the two bodies will orbit around their centre of mass in an elliptical orbit, as shown below.
         <link rel="stylesheet" href="index.css">
         <div class="container-tbp isFullScreenWide isUnselectable">
@@ -119,7 +119,8 @@
         There are a few special case systems which yield stable solutions.
 
         <h2>Figure Eight</h2>
-        This solution consists of 3 equal masses moving around a figure-eight shape. In this simulation, the system will still remain stable if we change the mass of all three bodies a little bit, to 0.99 for example. However, it will become unstable if we change the mass too much. (Why? - The initial velocity and positions of the bodies are fixed, but as you can imagine, the figure eight shape should be larger if the masses are larger, and vice versa.) Just for fun, try increasing the speed of the simulation - at certain speeds, you will see weird stroboscopic effects. (Warning: this can make you dizzy.)
+        This solution consists of 3 equal masses moving around a figure-eight shape. In this simulation, the system will still remain stable if we change the mass of all three bodies a little bit, to 0.99 for example. However, it will become unstable if we change the mass too much. <a href="#urmother2">:Why?</a>
+        <br><br>Just for fun, try increasing the speed of the simulation - at certain speeds, you will see weird stroboscopic effects. (Warning: this can make you dizzy.)
 
         <h2>Lagrange Point L5</h2>
         Here, Body B is located at the L5 Lagrange point of the Bodies A and C. This is one of the 5 Lagrange points, which are points of equilibrium under the two bodies. The L5 point lies $60^{\circ}$ behind Body C, and Body B located there will forever remain in that position as Body A orbits around Body C.
@@ -127,7 +128,9 @@
 
     </div>
     <h1>:x Urmother</h1>
-    Consider a similar system with mass \(m_1\) under its original conditions, but replacing mass 2 $m_2$ with a phantom mass $m_2'$ with infinite inertial mass and gravitational mass $m_2\left(\dfrac{r_1}{r_1+r_2}\right)^2$. Note that this replacement does not affect the motion of $m_1$ as it exerts the same force on $m_1$ as $m_2$. Thus, this reduces to a one body case, which has well-known solutions of conic sections.
+    Consider a similar system with mass \(m_1\) under its original conditions, but replacing mass $m_2$ with a phantom mass $M$ with infinite inertial mass and gravitational mass $m_2\left(\dfrac{r_1}{r_1+r_2}\right)^2$. Note that this replacement does not affect the motion of $m_1$ as it exerts the same force on $m_1$ as $m_2$. Thus, this reduces to a one body case, which has well-known solutions of conic sections.
+    <h1>:x urmother2</h1>
+    The initial velocity and positions of the bodies are fixed, but as you can imagine, the figure eight shape should be larger if the masses are larger, and vice versa.
     <script>
         userInput.init();
         simulation_twobody.start();
