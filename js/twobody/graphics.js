@@ -3,9 +3,7 @@ var graphics_twobody = (function() {
         context = null, // Canvas context for drawing.
         canvasHeight = 400,
         defaultBodySize = 80,
-        colors = {
-            orbitalPath: "#5555FF"
-        },
+        colors = ["#4ccdd2", "#d72e3a"],
         // Previously drawn positions of the two bodies. Used to draw orbital line.
         previousBodyPositions = [
             {x: null, y: null},
@@ -38,7 +36,7 @@ var graphics_twobody = (function() {
         earthElement.style.width = currentBodySizes[0] + "px";
     }
 
-    function drawOrbitalLine(newPosition, previousPosition) {
+    function drawOrbitalLine(newPosition, previousPosition, color) {
         if (previousPosition.x === null) {
             previousPosition.x = newPosition.x;
             previousPosition.y = newPosition.y;
@@ -46,7 +44,7 @@ var graphics_twobody = (function() {
         }
 
         context.beginPath();
-        context.strokeStyle = colors.orbitalPath;
+        context.strokeStyle = color;
         context.moveTo(previousPosition.x, previousPosition.y);
         context.lineTo(newPosition.x, newPosition.y);
         context.stroke();
@@ -72,11 +70,11 @@ var graphics_twobody = (function() {
     function drawScene(positions) {
         var body1Position = calculatePosition(positions[0]);
         drawBody(body1Position, currentBodySizes[0], earthElement);
-        drawOrbitalLine(body1Position, previousBodyPositions[0]);
+        drawOrbitalLine(body1Position, previousBodyPositions[0], colors[0]);
 
         var body2Position = calculatePosition(positions[1]);
         drawBody(body2Position, currentBodySizes[1], sunElement);
-        drawOrbitalLine(body2Position, previousBodyPositions[1]);
+        drawOrbitalLine(body2Position, previousBodyPositions[1], colors[1]);
     }
 
     // Resize canvas to will the width of container
