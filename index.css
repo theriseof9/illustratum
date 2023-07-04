@@ -16,7 +16,7 @@ body {
 }
 
 .no-justify {
-    /*text-align: left !important;*/
+    text-align: left !important;
 }
 
 .hasTopMarginSmall {
@@ -52,8 +52,8 @@ body {
     border: 1px solid #888;
     border-radius: 12px;
     overflow: hidden;
-    margin-left: -500px;
-    margin-right: -500px;
+    margin-left: -490px;
+    margin-right: -490px;
 }
 
 .container-tbp {
